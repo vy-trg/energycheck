@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+        EnergyCheck — FAQ / Help page
+        Yuxin Wang, NA17
+        Provides simple explanations for new users.
+        Directly responds to evaluator feedback about lack of guidance.
+        Based on requirements: plain English, renter-friendly advice,
+        high bill explanation, and controllable / uncontrollable factors.
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ — EnergyCheck</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .faq-layout {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: var(--space-md);
+            align-items: start;
+        }
+
+        .faq-nav {
+            background-color: var(--color-white);
+            border-radius: var(--radius-md);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .faq-nav a {
+            display: block;
+            padding: 12px var(--space-md);
+            border-left: 3px solid transparent;
+            color: var(--color-text);
+            font-size: var(--font-size-small);
+        }
+
+        .faq-nav a:hover {
+            background-color: var(--color-bg);
+            text-decoration: none;
+        }
+
+        .faq-nav a.active {
+            border-left-color: var(--color-primary);
+            color: var(--color-primary);
+            font-weight: 600;
+            background-color: rgba(46,125,50,0.06);
+        }
+
+        .faq-panel {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .faq-question {
+            color: var(--color-primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .tip-box {
+            background-color: rgba(255,191,0,0.15);
+            border-left: 4px solid var(--color-secondary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: var(--space-md);
+            margin-top: var(--space-sm);
+        }
+
+        .tip-box p {
+            margin: 0;
+            font-size: var(--font-size-small);
+        }
+
+        .quick-list {
+            margin-top: var(--space-sm);
+            padding-left: var(--space-md);
+        }
+
+        .quick-list li {
+            list-style: disc;
+            margin-bottom: 6px;
+        }
+
+        @media (max-width: 700px) {
+            .faq-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-nav {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .faq-nav a {
+                flex: 1;
+                text-align: center;
+                border-left: none;
+                border-bottom: 3px solid transparent;
+            }
+
+            .faq-nav a.active {
+                border-left-color: transparent;
+                border-bottom-color: var(--color-primary);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="site-header">
+        <span class="brand">⚡ EnergyCheck</span>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav id="mainNav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="comparison.html">Comparison</a>
+            <a href="tips.html">Tips</a>
+            <a href="control.html">Control</a>
+            <a href="alerts.html">Alerts</a>
+            <a href="report.html">Report</a>
+            <a href="profile.html">Profile</a>
+            <a href="faq.html" class="active">FAQ</a>
+            <a href="settings.html">Settings</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container page-section">
+
+            <h1>FAQ / Help</h1>
+            <p class="text-muted" style="margin-top: 8px; margin-bottom: var(--space-lg);">
+                Simple answers for busy households who want to understand their electricity use quickly.
+            </p>
+
+            <div class="faq-layout">
+
+                <nav class="faq-nav" aria-label="FAQ sections">
+                    <a href="#status" class="active">Usage status</a>
+                    <a href="#bill">High bills</a>
+                    <a href="#comparison">Similar households</a>
+                    <a href="#control">What I can control</a>
+                    <a href="#renters">Renters</a>
+                    <a href="#login">Login</a>
+                    <a href="#quicktips">Quick tips</a>
+                </nav>
+
+                <div class="faq-panel">
+
+                    <section class="card" id="status">
+                        <h2 class="faq-question">How do I know if my usage is normal, high, or low?</h2>
+                        <p>
+                            EnergyCheck uses simple colours to show your electricity usage status.
+                            Green means your usage is normal, amber means it is higher than usual,
+                            and red means it is very high.
+                        </p>
+
+                        <div class="tip-box">
+                            <p>
+                                Tip: Look at the colour first, then read the short explanation under the chart.
+                                This helps you understand the main message quickly.
+                            </p>
+                        </div>
+                    </section>
+
+                    <section class="card" id="bill">
+                        <h2 class="faq-question">Why is my electricity bill higher than usual?</h2>
+                        <p>
+                            A higher bill can happen for many reasons. Common causes include air conditioning,
+                            heating, dryers, cooking appliances, older appliances, or more people staying at home.
+                        </p>
+
+                        <div class="tip-box">
+                            <p>
+                                A high bill does not always mean you did something wrong. Energy use can change
+                                because of weather, household size, appliance age, or daily routines.
+                            </p>
+                        </div>
+                    </section>
+
+                    <section class="card" id="comparison">
+                        <h2 class="faq-question">Why compare my usage with similar households?</h2>
+                        <p>
+                            Different households use electricity in different ways. A small apartment and a large
+                            family home should not be compared in the same way.
+                        </p>
+                        <p>
+                            EnergyCheck compares your usage with similar households so the result is fairer and
+                            easier to understand.
+                        </p>
+                    </section>
+
+                    <section class="card" id="control">
+                        <h2 class="faq-question">What can I control?</h2>
+                        <p>
+                            You can control some daily habits, even if you cannot change the building or appliances.
+                        </p>
+
+                        <ul class="quick-list">
+                            <li>Turn off lights when leaving a room.</li>
+                            <li>Use fans before turning on air conditioning.</li>
+                            <li>Wash clothes with full loads.</li>
+                            <li>Unplug devices when they are not being used.</li>
+                            <li>Use natural light during the day when possible.</li>
+                        </ul>
+                    </section>
+
+                    <section class="card" id="renters">
+                        <h2 class="faq-question">What can’t I control as a renter?</h2>
+                        <p>
+                            Renters may have limited control over some energy-related problems. For example,
+                            you may not be able to change insulation, fixed appliances, solar panels, windows,
+                            or building design.
+                        </p>
+
+                        <div class="tip-box">
+                            <p>
+                                EnergyCheck focuses on realistic and affordable actions, so renters can still
+                                make small changes without needing landlord approval.
+                            </p>
+                        </div>
+                    </section>
+
+                    <section class="card" id="login">
+                        <h2 class="faq-question">Do I need to log in to use EnergyCheck?</h2>
+                        <p>
+                            No. You can access the basic information, comparison, and energy-saving advice
+                            without creating an account or logging in.
+                        </p>
+                        <p>
+                            This makes the website quicker and easier to use for people with limited time.
+                        </p>
+                    </section>
+
+                    <section class="card" id="quicktips">
+                        <h2 class="faq-question">How can I quickly reduce my electricity use?</h2>
+                        <p>
+                            Start with simple actions that do not cost money. Small habits can still make a
+                            difference over time.
+                        </p>
+
+                        <ul class="quick-list">
+                            <li>Set air conditioning to a moderate temperature.</li>
+                            <li>Switch off standby power at the wall.</li>
+                            <li>Use cold water for washing when possible.</li>
+                            <li>Dry clothes naturally instead of using a dryer.</li>
+                            <li>Check the Comparison page once a month.</li>
+                        </ul>
+
+                        <a class="btn" href="comparison.html" style="margin-top: var(--space-sm);">
+                            Back to Comparison
+                        </a>
+                    </section>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2026 EnergyCheck — NA17 | 2008ICT Design Thinking in IT, Griffith University</p>
+    </footer>
+
+    <script>
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('open');
+        });
+    </script>
+
+</body>
+</html>
