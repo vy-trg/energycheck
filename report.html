@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+        EnergyCheck — usage report page
+        Vy (Thi Tuong Vy Truong) s5434825, NA17
+        Month-by-month history (FR2) and monthly summary (FR4).
+        Includes context callout — addresses evaluator feedback that
+        graphs needed more explanation.
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usage Report — EnergyCheck</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* year selector tabs */
+        .month-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-md);
+        }
+
+        .month-tab {
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            border: 1.5px solid var(--color-border);
+            background-color: var(--color-white);
+            font-family: var(--font-main);
+            font-size: var(--font-size-small);
+            cursor: pointer;
+            color: var(--color-text);
+            transition: border-color 0.2s, background-color 0.2s; /* MDN */
+        }
+
+        .month-tab:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .month-tab.active {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            border-color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        /* stat summary cards */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .stat-card {
+            background-color: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .stat-card .stat-label {
+            font-size: var(--font-size-small);
+            color: var(--color-text-light);
+            margin-bottom: var(--space-xs);
+        }
+
+        .stat-card .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-primary);
+            line-height: 1.1;
+        }
+
+        .stat-card .stat-unit {
+            font-size: var(--font-size-small);
+            color: var(--color-text-light);
+        }
+
+        /* bar chart built with flexbox — no library needed.
+           Each .bar-wrap is a flex column; the .bar height is set
+           inline as a percentage of the tallest month (July = 100%). */
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 6px;
+            height: 200px;
+            padding-top: var(--space-sm);
+            border-bottom: 2px solid var(--color-border);
+            margin-bottom: var(--space-xs);
+        }
+
+        .bar-wrap {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            height: 100%;
+            justify-content: flex-end;
+        }
+
+        .bar {
+            width: 100%;
+            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+            min-height: 4px;
+            transition: opacity 0.2s; /* MDN — dims bar on hover */
+        }
+
+        .bar:hover {
+            opacity: 0.8;
+        }
+
+        /* bar colour matches the FR1 status indicator */
+        .bar.low    { background-color: var(--status-low); }
+        .bar.medium { background-color: var(--status-medium); }
+        .bar.high   { background-color: var(--status-high); }
+
+        .bar-value {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-text);
+            white-space: nowrap;
+        }
+
+        .bar-month {
+            font-size: 11px;
+            color: var(--color-text-light);
+            white-space: nowrap;
+        }
+
+        .chart-axis-label {
+            font-size: 12px;
+            color: var(--color-text-light);
+            margin-top: 4px;
+            text-align: center;
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+            margin-top: var(--space-sm);
+            margin-bottom: var(--space-lg);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: var(--font-size-small);
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* weekly breakdown table */
+        .usage-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--color-white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .usage-table th {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            padding: 12px var(--space-sm);
+            text-align: left;
+            font-size: var(--font-size-small);
+            font-weight: 600;
+        }
+
+        .usage-table td {
+            padding: 12px var(--space-sm);
+            font-size: var(--font-size-small);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .usage-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .usage-table tr:hover td {
+            background-color: rgba(46,125,50,0.04);
+        }
+
+        /* callout box — used to add context below the chart */
+        .context-box {
+            background-color: rgba(46,125,50,0.07);
+            border-left: 4px solid var(--color-primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: var(--space-md);
+        }
+
+        .context-box h3 {
+            margin-bottom: var(--space-xs);
+            color: var(--color-primary);
+        }
+
+        .context-box p {
+            margin: 0;
+            font-size: var(--font-size-small);
+        }
+
+        /* shrink chart on small screens */
+        @media (max-width: 600px) {
+            .bar-chart {
+                height: 140px;
+            }
+
+            .bar-value {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- shared header — copy this block into every page,
+         change class="active" to match the current page -->
+    <header class="site-header">
+        <span class="brand">⚡ EnergyCheck</span>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav id="mainNav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="comparison.html">Comparison</a>
+            <a href="tips.html">Tips</a>
+            <a href="control.html">Control</a>
+            <a href="alerts.html">Alerts</a>
+            <a href="report.html" class="active">Report</a>
+            <a href="profile.html">Profile</a>
+            <a href="faq.html">FAQ</a>
+            <a href="settings.html">Settings</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container page-section">
+
+            <h1>Usage Report</h1>
+            <p class="text-muted" style="margin-top: 8px; margin-bottom: var(--space-lg);">
+                Track your electricity usage month by month and understand your patterns over time.
+            </p>
+
+            <!-- month-by-month history (FR2) -->
+            <section style="margin-bottom: var(--space-xl);">
+                <h2 class="section-title">Monthly History</h2>
+                <p style="margin-bottom: var(--space-md);">
+                    The chart below shows your electricity usage (kWh) for each month this year.
+                    Colours indicate whether your usage was
+                    <strong style="color: var(--status-low)">low</strong>,
+                    <strong style="color: #b38600">medium</strong>, or
+                    <strong style="color: var(--status-high)">high</strong>
+                    compared to similar households.
+                </p>
+
+                <div class="month-tabs">
+                    <button class="month-tab">2025</button>
+                    <button class="month-tab active">2026</button>
+                </div>
+
+                <div class="card">
+                    <!-- heights are percentages relative to the tallest bar (Jul = 680 kWh = 100%) -->
+                    <div class="bar-chart">
+
+                        <div class="bar-wrap">
+                            <span class="bar-value">410</span>
+                            <div class="bar low" style="height: 60%;" title="Jan — 410 kWh — Low"></div>
+                            <span class="bar-month">Jan</span>
+                        </div>
+                        <div class="bar-wrap">
+                            <span class="bar-value">380</span>
+                            <div class="bar low" style="height: 56%;" title="Feb — 380 kWh — Low"></div>
+                            <span class="bar-month">Feb</span>
+                        </div>
+                        <div class="bar-wrap">
+                            <span class="bar-value">430</span>
+                            <div class="bar low" style="height: 63%;" title="Mar — 430 kWh — Low"></div>
+                            <span class="bar-month">Mar</span>
+                        </div>
+                        <div class="bar-wrap">
+                            <span class="bar-value">510</span>
+                            <div class="bar medium" style="height: 75%;" title="Apr — 510 kWh — Medium"></div>
+                            <span class="bar-month">Apr</span>
+                        </div>
+                        <div class="bar-wrap">
+                            <span class="bar-value">490</span>
+                            <div class="bar medium" style="height: 72%;" title="May — 490 kWh — Medium"></div>
+                            <span class="bar-month">May</span>
+                        </div>
+                        <div class="bar-wrap">
+                            <span class="bar-value">600</span>
+                            <div class="bar high" style="height: 88%;" title="Jun — 600 kWh — High"></div>
+                            <span class="bar-month">Jun</span>
+                        </div>
+                        <div class="bar-wrap">
+                            <span class="bar-value">680</span>
+                            <div class="bar high" style="height: 100%;" title="Jul — 680 kWh — High"></div>
+                            <span class="bar-month">Jul</span>
+                        </div>
+                        <div class="bar-wrap">
+                            <span class="bar-value">640</span>
+                            <div class="bar high" style="height: 94%;" title="Aug — 640 kWh — High"></div>
+                            <span class="bar-month">Aug</span>
+                        </div>
+                        <div class="bar-wrap">
+                            <span class="bar-value">520</span>
+                            <div class="bar medium" style="height: 76%;" title="Sep — 520 kWh — Medium"></div>
+                            <span class="bar-month">Sep</span>
+                        </div>
+                        <div class="bar-wrap">
+                            <span class="bar-value">460</span>
+                            <div class="bar low" style="height: 68%;" title="Oct — 460 kWh — Low"></div>
+                            <span class="bar-month">Oct</span>
+                        </div>
+                        <div class="bar-wrap">
+                            <span class="bar-value">390</span>
+                            <div class="bar low" style="height: 57%;" title="Nov — 390 kWh — Low"></div>
+                            <span class="bar-month">Nov</span>
+                        </div>
+                        <div class="bar-wrap">
+                            <span class="bar-value">420</span>
+                            <div class="bar low" style="height: 62%;" title="Dec — 420 kWh — Low"></div>
+                            <span class="bar-month">Dec</span>
+                        </div>
+
+                    </div>
+                    <p class="chart-axis-label">Monthly electricity usage (kWh) — 2026</p>
+
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <div class="legend-dot" style="background-color: var(--status-low);"></div>
+                            <span>Low — below average for similar households</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-dot" style="background-color: var(--status-medium);"></div>
+                            <span>Medium — slightly above average</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-dot" style="background-color: var(--status-high);"></div>
+                            <span>High — significantly above average</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- context callout — added after evaluators said graphs needed more explanation -->
+                <div class="context-box" style="margin-top: var(--space-md);">
+                    <h3>Why is usage higher in winter?</h3>
+                    <p>
+                        June–August are winter months in Queensland. Heating appliances such as
+                        electric blankets and reverse-cycle air conditioners are a common reason
+                        for higher electricity use during this period. This is normal for most
+                        households — your usage pattern is typical for a 2-person household in
+                        South East Queensland.
+                    </p>
+                </div>
+            </section>
+
+            <!-- monthly summary (FR4) -->
+            <section style="margin-bottom: var(--space-xl);">
+                <h2 class="section-title">Monthly Summary — May 2026</h2>
+
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <p class="stat-label">Total usage this month</p>
+                        <p class="stat-value">490 <span class="stat-unit">kWh</span></p>
+                        <span class="status-badge medium" style="margin-top: 8px; display: inline-block;">Medium</span>
+                    </div>
+                    <div class="stat-card">
+                        <p class="stat-label">Average daily usage</p>
+                        <p class="stat-value">15.8 <span class="stat-unit">kWh/day</span></p>
+                    </div>
+                    <div class="stat-card">
+                        <p class="stat-label">Estimated bill</p>
+                        <p class="stat-value">$147 <span class="stat-unit">AUD</span></p>
+                    </div>
+                    <div class="stat-card">
+                        <p class="stat-label">vs. similar households</p>
+                        <p class="stat-value" style="color: var(--status-medium);">+12%</p>
+                        <p class="stat-unit">above average</p>
+                    </div>
+                </div>
+
+                <h3 style="margin-bottom: var(--space-sm);">Week-by-Week Breakdown</h3>
+                <table class="usage-table">
+                    <thead>
+                        <tr>
+                            <th>Week</th>
+                            <th>Dates</th>
+                            <th>Usage (kWh)</th>
+                            <th>Daily Average</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Week 1</td>
+                            <td>1–7 May</td>
+                            <td>112 kWh</td>
+                            <td>16.0 kWh</td>
+                            <td><span class="status-badge medium">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>Week 2</td>
+                            <td>8–14 May</td>
+                            <td>108 kWh</td>
+                            <td>15.4 kWh</td>
+                            <td><span class="status-badge low">Low</span></td>
+                        </tr>
+                        <tr>
+                            <td>Week 3</td>
+                            <td>15–21 May</td>
+                            <td>136 kWh</td>
+                            <td>19.4 kWh</td>
+                            <td><span class="status-badge high">High</span></td>
+                        </tr>
+                        <tr>
+                            <td>Week 4</td>
+                            <td>22–31 May</td>
+                            <td>134 kWh</td>
+                            <td>13.4 kWh</td>
+                            <td><span class="status-badge medium">Medium</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="text-muted" style="margin-top: var(--space-sm);">
+                    * Week 3 shows higher usage — this may be related to cooler temperatures in late May.
+                    See the <a href="control.html">Control page</a> for tips on managing heating costs.
+                </p>
+            </section>
+
+            <section>
+                <div class="card" style="display: flex; align-items: center; gap: var(--space-md); flex-wrap: wrap;">
+                    <div>
+                        <h3>Want to keep a copy?</h3>
+                        <p class="text-muted" style="margin: 0;">
+                            Use your browser's print function (Ctrl+P / Cmd+P) to save this report as a PDF.
+                        </p>
+                    </div>
+                    <button class="btn" onclick="window.print()">Print / Save as PDF</button>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2026 EnergyCheck — NA17 | 2008ICT Design Thinking in IT, Griffith University</p>
+    </footer>
+
+    <script>
+        // mobile nav toggle (see note in style.css)
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('open');
+        });
+    </script>
+
+</body>
+</html>

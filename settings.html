@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+        EnergyCheck — settings page
+        Vy (Thi Tuong Vy Truong) s5434825, NA17
+        Language, dark mode, household profile, privacy preferences.
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings — EnergyCheck</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* settings page layout — sidebar + main panel side by side using grid */
+        .settings-layout {
+            display: grid;
+            gap: var(--space-md);
+            grid-template-columns: 220px 1fr;
+            align-items: start;
+        }
+
+        .settings-nav {
+            background-color: var(--color-white);
+            border-radius: var(--radius-md);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .settings-nav a {
+            display: block;
+            padding: 12px var(--space-md);
+            font-size: var(--font-size-body);
+            color: var(--color-text);
+            border-left: 3px solid transparent;
+            /* transition from MDN — same hover fade as the main nav */
+            transition: background-color 0.15s, border-color 0.15s;
+        }
+
+        .settings-nav a:hover {
+            background-color: var(--color-bg);
+            text-decoration: none;
+        }
+
+        .settings-nav a.active {
+            border-left-color: var(--color-primary);
+            color: var(--color-primary);
+            font-weight: 600;
+            background-color: rgba(46,125,50,0.06);
+        }
+
+        .settings-panel {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .settings-section-title {
+            font-size: var(--font-size-h2);
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: var(--space-sm);
+            padding-bottom: var(--space-xs);
+            border-bottom: 2px solid var(--color-primary);
+        }
+
+        /* on mobile, stack the sidebar above the panels and turn it into a tab row */
+        @media (max-width: 700px) {
+            .settings-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .settings-nav {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0;
+            }
+
+            .settings-nav a {
+                border-left: none;
+                border-bottom: 3px solid transparent;
+                flex: 1;
+                text-align: center;
+                font-size: var(--font-size-small);
+                padding: 10px 8px;
+            }
+
+            .settings-nav a.active {
+                border-bottom-color: var(--color-primary);
+                border-left-color: transparent;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- shared header — copy this block into every page,
+         change class="active" to match the current page -->
+    <header class="site-header">
+        <span class="brand">⚡ EnergyCheck</span>
+
+        <!-- hamburger — mobile only -->
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav id="mainNav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="comparison.html">Comparison</a>
+            <a href="tips.html">Tips</a>
+            <a href="control.html">Control</a>
+            <a href="alerts.html">Alerts</a>
+            <a href="report.html">Report</a>
+            <a href="profile.html">Profile</a>
+            <a href="faq.html">FAQ</a>
+            <a href="settings.html" class="active">Settings</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container page-section">
+
+            <h1>Settings</h1>
+            <p class="text-muted" style="margin-top: 8px; margin-bottom: var(--space-lg);">
+                Manage your preferences, display options, and privacy choices.
+            </p>
+
+            <div class="settings-layout">
+
+                <nav class="settings-nav" aria-label="Settings sections">
+                    <a href="#display" class="active">Display</a>
+                    <a href="#language">Language</a>
+                    <a href="#household">Household</a>
+                    <a href="#privacy">Privacy</a>
+                </nav>
+
+                <div class="settings-panel">
+
+                    <section class="card" id="display">
+                        <h2 class="settings-section-title">Display</h2>
+
+                        <div class="toggle-row">
+                            <span class="toggle-label">
+                                Dark Mode
+                                <span class="description">Switch to a darker colour theme</span>
+                            </span>
+                            <label class="toggle" aria-label="Toggle dark mode">
+                                <input type="checkbox" id="darkModeToggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="toggle-row">
+                            <span class="toggle-label">
+                                Large Text
+                                <span class="description">Increase font size for easier reading</span>
+                            </span>
+                            <label class="toggle" aria-label="Toggle large text">
+                                <input type="checkbox" id="largeTextToggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="toggle-row">
+                            <span class="toggle-label">
+                                High Contrast
+                                <span class="description">Improve visibility for low-vision users</span>
+                            </span>
+                            <label class="toggle" aria-label="Toggle high contrast">
+                                <input type="checkbox" id="highContrastToggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </section>
+
+                    <section class="card" id="language">
+                        <h2 class="settings-section-title">Language</h2>
+                        <p class="text-muted">Choose the language for all text on the site.</p>
+
+                        <div class="form-group">
+                            <label for="languageSelect">Display Language</label>
+                            <select id="languageSelect">
+                                <option value="en" selected>English</option>
+                                <option value="zh">中文 (Chinese)</option>
+                                <option value="vi">Tiếng Việt (Vietnamese)</option>
+                                <option value="ar">العربية (Arabic)</option>
+                                <option value="hi">हिन्दी (Hindi)</option>
+                            </select>
+                        </div>
+
+                        <p class="text-muted" style="font-size: 13px;">
+                            Note: Full translation is coming soon. Currently only English is fully supported.
+                        </p>
+                    </section>
+
+                    <section class="card" id="household">
+                        <h2 class="settings-section-title">Household Profile</h2>
+                        <p class="text-muted">
+                            This information helps us compare your usage to similar households accurately.
+                            You do not need to create an account — your data stays on your device.
+                        </p>
+
+                        <div class="form-group">
+                            <label for="householdSize">Number of people in your household</label>
+                            <select id="householdSize">
+                                <option value="">Select…</option>
+                                <option value="1">1 person</option>
+                                <option value="2">2 people</option>
+                                <option value="3">3 people</option>
+                                <option value="4">4 people</option>
+                                <option value="5+">5 or more</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="homeType">Type of home</label>
+                            <select id="homeType">
+                                <option value="">Select…</option>
+                                <option value="apartment">Apartment / Unit</option>
+                                <option value="house">House</option>
+                                <option value="townhouse">Townhouse</option>
+                                <option value="shared">Shared housing</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="postcode">Postcode (optional)</label>
+                            <input type="text" id="postcode" placeholder="e.g. 4111" maxlength="4">
+                        </div>
+                    </section>
+
+                    <section class="card" id="privacy">
+                        <h2 class="settings-section-title">Privacy</h2>
+                        <p class="text-muted">
+                            EnergyCheck does not collect or store your personal data on any server.
+                            All preferences are saved locally in your browser only.
+                        </p>
+
+                        <div class="toggle-row">
+                            <span class="toggle-label">
+                                Save my preferences locally
+                                <span class="description">Remember your settings when you return</span>
+                            </span>
+                            <label class="toggle" aria-label="Save preferences">
+                                <input type="checkbox" id="savePrefsToggle" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div style="margin-top: var(--space-md);">
+                            <button class="btn btn-outline" id="clearDataBtn">
+                                Clear all saved data
+                            </button>
+                        </div>
+                    </section>
+
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2026 EnergyCheck — NA17 | 2008ICT Design Thinking in IT, Griffith University</p>
+    </footer>
+
+    <script>
+        // dark mode and large text need JS because there's no CSS-only way
+        // to toggle a class on <body> from a checkbox elsewhere on the page — MDN
+
+        // mobile nav (see note in style.css)
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('open');
+        });
+
+        // dark mode — adds class="dark-mode" to <body>; CSS variables do the rest
+        var darkToggle = document.getElementById('darkModeToggle');
+        darkToggle.addEventListener('change', function() {
+            document.body.classList.toggle('dark-mode', darkToggle.checked);
+        });
+
+        // large text — increases the root font size so all rem/em values scale up
+        var largeTextToggle = document.getElementById('largeTextToggle');
+        largeTextToggle.addEventListener('change', function() {
+            document.documentElement.style.fontSize = largeTextToggle.checked ? '19px' : '';
+        });
+    </script>
+
+</body>
+</html>
