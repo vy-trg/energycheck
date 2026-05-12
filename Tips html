@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+ <!--
+        EnergyCheck — tips page
+        Ayat (Taher Abdul Wahed) S5438900, NA17
+       
+    -->
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EnergyCheck - Tips Page</title>
+
+    <link rel="stylesheet" href="tips.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- NAVBAR -->
+        <nav class="navbar">
+
+            <div class="logo">
+                EnergyCheck
+            </div>
+
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">Comparison</a>
+                <a href="#">Control</a>
+            </div>
+
+            <div class="settings">
+                ⚙
+            </div>
+
+        </nav>
+
+        <!-- PAGE TITLE -->
+        <h1 class="title">Energy Saving Tips</h1>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+
+            <!-- TIPS SECTION -->
+            <div class="tips-grid">
+
+                <div class="tip-card">
+                    <h2>Run Pool Pump Off-Peak</h2>
+
+                    <p>
+                        Schedule your pool pump to run during off-peak
+                        hours to reduce electricity costs.
+                    </p>
+
+                    <div class="saving">
+                        Save up to $250/year
+                    </div>
+
+                    <button>Apply Tip</button>
+                </div>
+
+                <div class="tip-card">
+                    <h2>Reduce Air Conditioning Usage</h2>
+
+                    <p>
+                        Increase your AC temperature slightly and
+                        reduce unnecessary cooling.
+                    </p>
+
+                    <div class="saving">
+                        Save up to $320/year
+                    </div>
+
+                    <button>Apply Tip</button>
+                </div>
+
+                <div class="tip-card">
+                    <h2>Use Appliances During Daytime</h2>
+
+                    <p>
+                        Running appliances earlier in the day can help
+                        reduce energy costs.
+                    </p>
+
+                    <div class="saving">
+                        Save up to $180/year
+                    </div>
+
+                    <button>Apply Tip</button>
+                </div>
+
+                <div class="tip-card">
+                    <h2>Turn Off Standby Devices</h2>
+
+                    <p>
+                        Unplug unused electronics and reduce standby
+                        power consumption.
+                    </p>
+
+                    <div class="saving">
+                        Save up to $120/year
+                    </div>
+
+                    <button>Apply Tip</button>
+                </div>
+
+            </div>
+
+            <!-- SUMMARY SECTION -->
+            <div class="summary-boxes">
+
+                <div class="summary-card">
+                    <h3>Total Potential Savings</h3>
+
+                    <p>$1,062</p>
+
+                    <span>per year</span>
+                </div>
+
+                <div class="summary-card">
+                    <h3>Tips Available</h3>
+
+                    <p>8</p>
+
+                    <span>actionable items</span>
+                </div>
+
+                <div class="summary-card">
+                    <h3>Quick Wins</h3>
+
+                    <p>6</p>
+
+                    <span>easy changes</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
