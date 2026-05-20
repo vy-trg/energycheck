@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!--
         EnergyCheck — settings page
         Vy (Thi Tuong Vy Truong) s5434825, NA17
-        Language, dark mode, household profile, privacy preferences.
+        Energy goal, accessibility, notifications, comparison preferences,
+        household profile (static), privacy, about.
     -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +14,7 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-        /* settings page layout — sidebar + main panel side by side using grid */
+        /* settings layout — sidebar + panel using CSS Grid (Week 5 workshop) */
         .settings-layout {
             display: grid;
             gap: var(--space-md);
@@ -23,7 +25,7 @@
         .settings-nav {
             background-color: var(--color-white);
             border-radius: var(--radius-md);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             overflow: hidden;
         }
 
@@ -33,8 +35,8 @@
             font-size: var(--font-size-body);
             color: var(--color-text);
             border-left: 3px solid transparent;
-            /* transition from MDN — same hover fade as the main nav */
             transition: background-color 0.15s, border-color 0.15s;
+            /* MDN */
         }
 
         .settings-nav a:hover {
@@ -46,7 +48,7 @@
             border-left-color: var(--color-primary);
             color: var(--color-primary);
             font-weight: 600;
-            background-color: rgba(46,125,50,0.06);
+            background-color: rgba(46, 125, 50, 0.06);
         }
 
         .settings-panel {
@@ -64,7 +66,192 @@
             border-bottom: 2px solid var(--color-primary);
         }
 
-        /* on mobile, stack the sidebar above the panels and turn it into a tab row */
+        /* prototype note — amber callout box */
+        .prototype-note {
+            background-color: rgba(255, 191, 0, 0.12);
+            border-left: 4px solid var(--color-secondary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: var(--space-sm) var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .prototype-note p {
+            margin: 0;
+            font-size: var(--font-size-small);
+            color: var(--color-text-light);
+        }
+
+        /* goal feedback — shown/hidden using CSS :placeholder-shown trick.
+           When the input still shows its placeholder (empty), .goal-empty shows.
+           When the user has typed something, .goal-filled shows instead.
+           Source: MDN Web Docs, :placeholder-shown pseudo-class */
+        .goal-feedback {
+            margin-top: var(--space-sm);
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-small);
+        }
+
+        .goal-empty {
+            background-color: var(--color-bg);
+            color: var(--color-text-light);
+            border: 1.5px dashed var(--color-border);
+        }
+
+        .goal-filled {
+            background-color: rgba(46, 125, 50, 0.08);
+            border-left: 4px solid var(--color-primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            color: var(--color-primary);
+            font-weight: 600;
+            /* hidden by default — shown when input is NOT showing placeholder */
+            display: none;
+        }
+
+        /* :placeholder-shown = input is empty (placeholder visible) */
+        #goalKwh:placeholder-shown~.goal-empty {
+            display: block;
+        }
+
+        #goalKwh:placeholder-shown~.goal-filled {
+            display: none;
+        }
+
+        /* :not(:placeholder-shown) = user has typed something */
+        #goalKwh:not(:placeholder-shown)~.goal-empty {
+            display: none;
+        }
+
+        #goalKwh:not(:placeholder-shown)~.goal-filled {
+            display: block;
+        }
+
+        /* goal bar */
+        .goal-bar-wrap {
+            background-color: var(--color-border);
+            border-radius: var(--radius-md);
+            height: 14px;
+            margin-top: var(--space-xs);
+            overflow: hidden;
+        }
+
+        .goal-bar {
+            height: 100%;
+            border-radius: var(--radius-md);
+            background-color: var(--status-medium);
+        }
+
+        /* accessibility — radio button group (HTML Forms, Week 7 workshop) */
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+            margin-top: var(--space-xs);
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: 10px var(--space-md);
+            border: 1.5px solid var(--color-border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-size: var(--font-size-body);
+        }
+
+        /* highlight the selected radio option using :has() — MDN */
+        .radio-option:has(input[type="radio"]:checked) {
+            border-color: var(--color-primary);
+            background-color: rgba(46, 125, 50, 0.05);
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        /* notification checkboxes */
+        .checkbox-option {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-sm);
+            padding-top: var(--space-sm);
+            padding-bottom: var(--space-sm);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .checkbox-option:last-child {
+            border-bottom: none;
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            margin-top: 3px;
+            flex-shrink: 0;
+            accent-color: var(--color-primary);
+            width: 18px;
+            height: 18px;
+        }
+
+        .checkbox-option .opt-label {
+            font-size: var(--font-size-body);
+            font-weight: 600;
+        }
+
+        .checkbox-option .opt-desc {
+            display: block;
+            font-size: var(--font-size-small);
+            color: var(--color-text-light);
+            font-weight: 400;
+        }
+
+        /* household summary — static display card (FR3) */
+        .profile-summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-sm);
+            margin-top: var(--space-sm);
+        }
+
+        .profile-item {
+            background-color: var(--color-bg);
+            border-radius: var(--radius-md);
+            padding: var(--space-sm) var(--space-md);
+        }
+
+        .profile-item .profile-label {
+            font-size: var(--font-size-small);
+            color: var(--color-text-light);
+            margin-bottom: 4px;
+        }
+
+        .profile-item .profile-value {
+            font-size: var(--font-size-body);
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        /* about info rows */
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding-top: var(--space-sm);
+            padding-bottom: var(--space-sm);
+            border-bottom: 1px solid var(--color-border);
+            font-size: var(--font-size-small);
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-row .info-label {
+            color: var(--color-text-light);
+        }
+
+        .info-row .info-value {
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        /* mobile — stack sidebar */
         @media (max-width: 700px) {
             .settings-layout {
                 grid-template-columns: 1fr;
@@ -89,23 +276,21 @@
                 border-bottom-color: var(--color-primary);
                 border-left-color: transparent;
             }
+
+            .profile-summary {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
+
 <body>
 
-    <!-- shared header — copy this block into every page,
-         change class="active" to match the current page -->
     <header class="site-header">
         <span class="brand">⚡ EnergyCheck</span>
-
-        <!-- hamburger — mobile only -->
         <button class="nav-toggle" id="navToggle" aria-label="Open menu">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </button>
-
         <nav id="mainNav">
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
@@ -125,142 +310,276 @@
 
             <h1>Settings</h1>
             <p class="text-muted" style="margin-top: 8px; margin-bottom: var(--space-lg);">
-                Manage your preferences, display options, and privacy choices.
+                Manage your energy goal, display preferences, notifications, and privacy choices.
             </p>
 
             <div class="settings-layout">
 
                 <nav class="settings-nav" aria-label="Settings sections">
-                    <a href="#display" class="active">Display</a>
-                    <a href="#language">Language</a>
+                    <a href="#goal" class="active">Energy Goal</a>
+                    <a href="#accessibility">Accessibility</a>
+                    <a href="#notifications">Notifications</a>
+                    <a href="#comparison">Comparison</a>
                     <a href="#household">Household</a>
                     <a href="#privacy">Privacy</a>
+                    <a href="#about">About</a>
                 </nav>
 
                 <div class="settings-panel">
 
-                    <section class="card" id="display">
-                        <h2 class="settings-section-title">Display</h2>
-
-                        <div class="toggle-row">
-                            <span class="toggle-label">
-                                Dark Mode
-                                <span class="description">Switch to a darker colour theme</span>
-                            </span>
-                            <label class="toggle" aria-label="Toggle dark mode">
-                                <input type="checkbox" id="darkModeToggle">
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-
-                        <div class="toggle-row">
-                            <span class="toggle-label">
-                                Large Text
-                                <span class="description">Increase font size for easier reading</span>
-                            </span>
-                            <label class="toggle" aria-label="Toggle large text">
-                                <input type="checkbox" id="largeTextToggle">
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-
-                        <div class="toggle-row">
-                            <span class="toggle-label">
-                                High Contrast
-                                <span class="description">Improve visibility for low-vision users</span>
-                            </span>
-                            <label class="toggle" aria-label="Toggle high contrast">
-                                <input type="checkbox" id="highContrastToggle">
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                    </section>
-
-                    <section class="card" id="language">
-                        <h2 class="settings-section-title">Language</h2>
-                        <p class="text-muted">Choose the language for all text on the site.</p>
+                    <!-- 1. ENERGY GOAL — form inputs + CSS :placeholder-shown feedback -->
+                    <section class="card" id="goal">
+                        <h2 class="settings-section-title">Energy Goal</h2>
+                        <p class="text-muted" style="margin-bottom: var(--space-md);">
+                            Set a monthly electricity usage target to give yourself a personal benchmark
+                            alongside the household comparison.
+                        </p>
 
                         <div class="form-group">
-                            <label for="languageSelect">Display Language</label>
-                            <select id="languageSelect">
-                                <option value="en" selected>English</option>
-                                <option value="zh">中文 (Chinese)</option>
-                                <option value="vi">Tiếng Việt (Vietnamese)</option>
-                                <option value="ar">العربية (Arabic)</option>
-                                <option value="hi">हिन्दी (Hindi)</option>
-                            </select>
+                            <label for="goalKwh">Monthly usage target (kWh)</label>
+                            <input type="number" id="goalKwh" placeholder="e.g. 450" min="50" max="2000">
+
+                            <!-- CSS :placeholder-shown trick — no JS needed.
+                                 Empty state shows the dashed box; filled state shows the green advice.
+                                 Source: MDN Web Docs, :placeholder-shown -->
+                            <p class="goal-feedback goal-empty">
+                                Enter a target above to see personalised advice.
+                            </p>
+                            <p class="goal-feedback goal-filled">
+                                ✓ Goal saved. Check your Report page to track your progress against this target.
+                            </p>
                         </div>
 
-                        <p class="text-muted" style="font-size: 13px;">
-                            Note: Full translation is coming soon. Currently only English is fully supported.
+                        <div class="form-group">
+                            <label for="goalBill">Monthly bill target (AUD, optional)</label>
+                            <input type="number" id="goalBill" placeholder="e.g. 130" min="10" max="1000">
+                        </div>
+
+                        <!-- Static example bar — current month vs example goal -->
+                        <p style="margin-bottom: var(--space-xs); font-size: var(--font-size-small);">
+                            Example: current usage <strong>490 kWh</strong> vs goal <strong>450 kWh</strong>
+                        </p>
+                        <div class="goal-bar-wrap">
+                            <div class="goal-bar" style="width: 100%; background-color: var(--status-high);"></div>
+                        </div>
+                        <p class="text-muted" style="margin-top: 4px; font-size: 13px;">
+                            This example shows usage slightly over goal — the bar turns red when over target.
                         </p>
                     </section>
 
+                    <!-- 2. ACCESSIBILITY — radio buttons (HTML Forms, Week 7 workshop)
+                         NFR1 (plain English) and Week 5 Universal Design lecture -->
+                    <section class="card" id="accessibility">
+                        <h2 class="settings-section-title">Accessibility</h2>
+                        <p class="text-muted" style="margin-bottom: var(--space-md);">
+                            Adjust how EnergyCheck looks to suit your reading preferences.
+                            These options support users with different accessibility needs (NFR1).
+                        </p>
+
+                        <div class="form-group">
+                            <label>Text size</label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="textSize" value="normal" checked>
+                                    Normal
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="textSize" value="large">
+                                    Large
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="textSize" value="xlarge">
+                                    Extra Large
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top: var(--space-md);">
+                            <label>Colour theme</label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="colourTheme" value="default" checked>
+                                    Default (light)
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="colourTheme" value="dark">
+                                    Dark mode
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="colourTheme" value="contrast">
+                                    High contrast
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 3. NOTIFICATIONS — checkboxes (HTML Forms, Week 7 workshop)
+                         NFR5 (non-judgmental, not overwhelming) and FR9 (alerts) -->
+                    <section class="card" id="notifications">
+                        <h2 class="settings-section-title">Notifications</h2>
+                        <p class="text-muted" style="margin-bottom: var(--space-md);">
+                            Choose which updates you want to receive. You are in control of how
+                            often EnergyCheck reminds you — keeping it simple and non-overwhelming (NFR5).
+                        </p>
+
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="notifHigh" checked>
+                            <label for="notifHigh">
+                                <span class="opt-label">High usage alert</span>
+                                <span class="opt-desc">Notify me when my usage is significantly above average</span>
+                            </label>
+                        </div>
+
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="notifWeekly" checked>
+                            <label for="notifWeekly">
+                                <span class="opt-label">Weekly usage summary</span>
+                                <span class="opt-desc">Send me a brief summary of my usage each week</span>
+                            </label>
+                        </div>
+
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="notifBill">
+                            <label for="notifBill">
+                                <span class="opt-label">Bill estimate reminder</span>
+                                <span class="opt-desc">Remind me when my estimated bill is approaching my target</span>
+                            </label>
+                        </div>
+
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="notifTips">
+                            <label for="notifTips">
+                                <span class="opt-label">Energy saving tips</span>
+                                <span class="opt-desc">Suggest a new tip when my usage increases</span>
+                            </label>
+                        </div>
+                    </section>
+
+                    <!-- 4. COMPARISON PREFERENCES — radio buttons (FR3) -->
+                    <section class="card" id="comparison">
+                        <h2 class="settings-section-title">Comparison Preferences</h2>
+                        <p class="text-muted" style="margin-bottom: var(--space-md);">
+                            Choose how EnergyCheck compares your usage to other households (FR3).
+                            A fairer comparison gives you a more useful result.
+                        </p>
+
+                        <div class="form-group">
+                            <label>Compare my usage with</label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="compareGroup" value="similar" checked>
+                                    Similar-sized households (recommended)
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="compareGroup" value="renters">
+                                    Renters only
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="compareGroup" value="all">
+                                    All households
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top: var(--space-md);">
+                            <label>Comparison period</label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="comparePeriod" value="monthly" checked>
+                                    Monthly
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="comparePeriod" value="quarterly">
+                                    Quarterly (3 months)
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 5. HOUSEHOLD PROFILE — static summary (FR3, NFR7) -->
                     <section class="card" id="household">
                         <h2 class="settings-section-title">Household Profile</h2>
-                        <p class="text-muted">
-                            This information helps us compare your usage to similar households accurately.
-                            You do not need to create an account — your data stays on your device.
+                        <p class="text-muted" style="margin-bottom: var(--space-md);">
+                            Your household profile helps EnergyCheck compare your usage to
+                            similar households accurately (FR3). This is an example profile.
                         </p>
 
-                        <div class="form-group">
-                            <label for="householdSize">Number of people in your household</label>
-                            <select id="householdSize">
-                                <option value="">Select…</option>
-                                <option value="1">1 person</option>
-                                <option value="2">2 people</option>
-                                <option value="3">3 people</option>
-                                <option value="4">4 people</option>
-                                <option value="5+">5 or more</option>
-                            </select>
+                        <div class="profile-summary">
+                            <div class="profile-item">
+                                <p class="profile-label">Household size</p>
+                                <p class="profile-value">2 people</p>
+                            </div>
+                            <div class="profile-item">
+                                <p class="profile-label">Type of home</p>
+                                <p class="profile-value">Apartment / Unit</p>
+                            </div>
+                            <div class="profile-item">
+                                <p class="profile-label">Postcode</p>
+                                <p class="profile-value">4111</p>
+                            </div>
+                            <div class="profile-item">
+                                <p class="profile-label">Renter</p>
+                                <p class="profile-value">Yes</p>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="homeType">Type of home</label>
-                            <select id="homeType">
-                                <option value="">Select…</option>
-                                <option value="apartment">Apartment / Unit</option>
-                                <option value="house">House</option>
-                                <option value="townhouse">Townhouse</option>
-                                <option value="shared">Shared housing</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="postcode">Postcode (optional)</label>
-                            <input type="text" id="postcode" placeholder="e.g. 4111" maxlength="4">
-                        </div>
+                        <p class="text-muted" style="margin-top: var(--space-md); font-size: 13px;">
+                            In a live version of EnergyCheck, you would be able to update your
+                            profile here. Your data would stay on your device only — no account needed.
+                        </p>
                     </section>
 
+                    <!-- 6. PRIVACY — Week 10 Human Factors and Security lecture -->
                     <section class="card" id="privacy">
                         <h2 class="settings-section-title">Privacy</h2>
-                        <p class="text-muted">
-                            EnergyCheck does not collect or store your personal data on any server.
-                            All preferences are saved locally in your browser only.
+                        <p class="text-muted" style="margin-bottom: var(--space-md);">
+                            EnergyCheck is designed with user privacy in mind.
                         </p>
 
-                        <div class="toggle-row">
-                            <span class="toggle-label">
-                                Save my preferences locally
-                                <span class="description">Remember your settings when you return</span>
-                            </span>
-                            <label class="toggle" aria-label="Save preferences">
-                                <input type="checkbox" id="savePrefsToggle" checked>
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
+                        <p class="text-muted">
+                            This is a front-end prototype — no data is collected or stored on any server.
+                            In a live version, all preferences would be saved locally in your browser only,
+                            never sent to a server or shared with third parties.
+                        </p>
 
-                        <div style="margin-top: var(--space-md);">
-                            <button class="btn btn-outline" id="clearDataBtn">
-                                Clear all saved data
-                            </button>
-                        </div>
+                        <p class="text-muted" style="margin-top: var(--space-sm);">
+                            EnergyCheck does not use tracking cookies. Any data entered is used
+                            only to personalise your comparison results on your own device.
+                        </p>
                     </section>
 
+                    <!-- 7. ABOUT -->
+                    <section class="card" id="about">
+                        <h2 class="settings-section-title">About EnergyCheck</h2>
+                        <p class="text-muted" style="margin-bottom: var(--space-md);">
+                            EnergyCheck helps Australian renters understand their household electricity
+                            usage and take simple steps to reduce their bills without feeling overwhelmed.
+                        </p>
+
+                        <div class="info-row">
+                            <span class="info-label">Project</span>
+                            <span class="info-value">EnergyCheck</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Team</span>
+                            <span class="info-value">NA17 — 2008ICT Design Thinking in IT</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">University</span>
+                            <span class="info-value">Griffith University</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Version</span>
+                            <span class="info-value">1.0 — Trimester 1, 2026</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Topic</span>
+                            <span class="info-value">Help manage energy use without feeling overwhelmed</span>
+                        </div>
+                    </section>
 
                 </div>
             </div>
-
         </div>
     </main>
 
@@ -269,26 +588,12 @@
     </footer>
 
     <script>
-        // dark mode and large text need JS because there's no CSS-only way
-        // to toggle a class on <body> from a checkbox elsewhere on the page — MDN
-
-        // mobile nav (see note in style.css)
-        document.getElementById('navToggle').addEventListener('click', function() {
+        // mobile nav toggle (see note in style.css)
+        document.getElementById('navToggle').addEventListener('click', function () {
             document.getElementById('mainNav').classList.toggle('open');
-        });
-
-        // dark mode — adds class="dark-mode" to <body>; CSS variables do the rest
-        var darkToggle = document.getElementById('darkModeToggle');
-        darkToggle.addEventListener('change', function() {
-            document.body.classList.toggle('dark-mode', darkToggle.checked);
-        });
-
-        // large text — increases the root font size so all rem/em values scale up
-        var largeTextToggle = document.getElementById('largeTextToggle');
-        largeTextToggle.addEventListener('change', function() {
-            document.documentElement.style.fontSize = largeTextToggle.checked ? '19px' : '';
         });
     </script>
 
 </body>
+
 </html>
