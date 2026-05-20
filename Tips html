@@ -4,7 +4,11 @@
 <head>
     <!--
         EnergyCheck — Tips page
-        Author: Ayat Taher Abdul Wahed s5438900, NA17
+        Original author: Ayat Taher Abdul Wahed s5438900, NA17
+        Updated by: Vy (Thi Tuong Vy Truong) s5434825, NA17
+        Changes: navbar updated to shared structure, 4 additional tip cards added,
+        Quick Wins section added, button changed from Apply Tip to Learn more,
+        footer updated to match team standard.
     -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +16,8 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-        /* quick wins list — smaller items, disc list style */
+        /* quick wins list — added by Vy
+           disc list style overrides the shared CSS ul { list-style: none } */
         .quick-wins-list {
             margin-top: var(--space-sm);
             padding-left: var(--space-md);
@@ -33,6 +38,8 @@
 
 <body>
 
+    <!-- NAVIGATION — updated by Vy to match shared structure used by all pages.
+         Original version by Ayat used a custom .navbar div with only 4 links. -->
     <header class="site-header">
         <span class="brand">⚡ EnergyCheck</span>
 
@@ -60,13 +67,16 @@
         <section class="page-section">
             <div class="container">
 
+                <!-- PAGE TITLE — added by Vy (original used custom .title class) -->
                 <h1 class="section-title">Energy Saving Tips</h1>
                 <p class="text-muted" style="margin-bottom: var(--space-lg);">
                     Simple, renter-friendly tips to help reduce your electricity bills
                     without needing landlord approval.
                 </p>
 
-                <!-- SUMMARY CARDS -->
+                <!-- SUMMARY CARDS — original structure by Ayat.
+                     Vy updated to use shared .card and .card-grid classes,
+                     and moved above the tips grid to match the prototype layout. -->
                 <div class="card-grid" style="margin-bottom: var(--space-lg);">
                     <div class="card" style="text-align: center;">
                         <h3>Total Potential Savings</h3>
@@ -84,14 +94,19 @@
                         <h3>Quick Wins</h3>
                         <p style="font-size: 28px; font-weight: 700; color: var(--color-primary); margin-bottom: 4px;">6
                         </p>
+                        <!-- updated by Vy — clarified label from "easy changes" to "no-cost easy changes" -->
                         <span class="text-muted">no-cost easy changes</span>
                     </div>
                 </div>
 
-                <!-- 8 TIPS GRID -->
+                <!-- TIPS GRID — original 4 cards by Ayat.
+                     Vy updated card markup to use shared .card class (was .tip-card),
+                     changed button from <button>Apply Tip</button> to <a class="btn">Learn more</a>,
+                     and added 4 new cards to match the "8 actionable items" count in the summary. -->
                 <h2 class="section-title" style="margin-bottom: var(--space-md);">All Tips</h2>
                 <div class="card-grid" style="margin-bottom: var(--space-xl);">
 
+                    <!-- original tip cards by Ayat — markup updated by Vy -->
                     <div class="card">
                         <h3>Reduce Air Conditioning Usage</h3>
                         <p>Increase your AC temperature by 1–2 degrees and use fans first before turning on cooling.</p>
@@ -125,6 +140,7 @@
                         <a href="faq.html#quicktips" class="btn">Learn more</a>
                     </div>
 
+                    <!-- additional tip cards added by Vy to match "8 actionable items" count -->
                     <div class="card">
                         <h3>Switch to LED Lighting</h3>
                         <p>Replace halogen or incandescent bulbs with LED alternatives — they use up to 75% less energy.
@@ -161,7 +177,9 @@
 
                 </div>
 
-                <!-- QUICK WINS SECTION — 6 no-cost changes -->
+                <!-- QUICK WINS SECTION — added by Vy.
+                     Original version had no explanation for the "6 easy changes" count in the summary.
+                     This section makes those 6 items explicit. -->
                 <h2 class="section-title" style="margin-bottom: var(--space-md);">Quick Wins — 6 Easy No-Cost Changes
                 </h2>
                 <div class="card">
@@ -183,12 +201,13 @@
         </section>
     </main>
 
+    <!-- FOOTER — updated by Vy to match team standard format -->
     <footer class="site-footer">
         <p>© 2026 EnergyCheck — NA17 | 2008ICT Design Thinking in IT, Griffith University</p>
     </footer>
 
+    <!-- mobile nav toggle — updated by Vy to use id selectors consistent with other pages -->
     <script>
-        // mobile nav toggle (see note in style.css)
         document.getElementById('navToggle').addEventListener('click', function () {
             document.getElementById('mainNav').classList.toggle('open');
         });
