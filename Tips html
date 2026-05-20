@@ -1,147 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-
- <!--
-        EnergyCheck — tips page
-        Ayat (Taher Abdul Wahed) S5438900, NA17
-       
+    <!--
+        EnergyCheck — Tips page
+        Author: Ayat Taher Abdul Wahed s5438900, NA17
     -->
-
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EnergyCheck - Tips Page</title>
+    <title>EnergyCheck — Energy Saving Tips</title>
+    <link rel="stylesheet" href="style.css">
 
-    <link rel="stylesheet" href="tips.css">
+    <style>
+        /* quick wins list — smaller items, disc list style */
+        .quick-wins-list {
+            margin-top: var(--space-sm);
+            padding-left: var(--space-md);
+        }
+
+        .quick-wins-list li {
+            list-style: disc !important;
+            margin-bottom: 8px;
+            font-size: var(--font-size-body);
+        }
+
+        .quick-wins-list li span {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+    </style>
 </head>
 
 <body>
 
-    <div class="container">
+    <header class="site-header">
+        <span class="brand">⚡ EnergyCheck</span>
 
-        <!-- NAVBAR -->
-        <nav class="navbar">
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-            <div class="logo">
-                EnergyCheck
-            </div>
-
-            <div class="nav-links">
-                <a href="#">Home</a>
-                <a href="#">Comparison</a>
-                <a href="#">Control</a>
-            </div>
-
-            <div class="settings">
-                ⚙
-            </div>
-
+        <nav id="mainNav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="comparison.html">Comparison</a>
+            <a href="tips.html" class="active">Tips</a>
+            <a href="control.html">Control</a>
+            <a href="alerts.html">Alerts</a>
+            <a href="report.html">Report</a>
+            <a href="profile.html">Profile</a>
+            <a href="faq.html">FAQ</a>
+            <a href="settings.html">Settings</a>
         </nav>
+    </header>
 
-        <!-- PAGE TITLE -->
-        <h1 class="title">Energy Saving Tips</h1>
+    <main>
+        <section class="page-section">
+            <div class="container">
 
-        <!-- MAIN CONTENT -->
-        <div class="main-content">
+                <h1 class="section-title">Energy Saving Tips</h1>
+                <p class="text-muted" style="margin-bottom: var(--space-lg);">
+                    Simple, renter-friendly tips to help reduce your electricity bills
+                    without needing landlord approval.
+                </p>
 
-            <!-- TIPS SECTION -->
-            <div class="tips-grid">
-
-                <div class="tip-card">
-                    <h2>Run Pool Pump Off-Peak</h2>
-
-                    <p>
-                        Schedule your pool pump to run during off-peak
-                        hours to reduce electricity costs.
-                    </p>
-
-                    <div class="saving">
-                        Save up to $250/year
+                <!-- SUMMARY CARDS -->
+                <div class="card-grid" style="margin-bottom: var(--space-lg);">
+                    <div class="card" style="text-align: center;">
+                        <h3>Total Potential Savings</h3>
+                        <p style="font-size: 28px; font-weight: 700; color: var(--color-primary); margin-bottom: 4px;">
+                            $1,062</p>
+                        <span class="text-muted">per year</span>
                     </div>
-
-                    <button>Apply Tip</button>
+                    <div class="card" style="text-align: center;">
+                        <h3>Tips Available</h3>
+                        <p style="font-size: 28px; font-weight: 700; color: var(--color-primary); margin-bottom: 4px;">8
+                        </p>
+                        <span class="text-muted">actionable items</span>
+                    </div>
+                    <div class="card" style="text-align: center;">
+                        <h3>Quick Wins</h3>
+                        <p style="font-size: 28px; font-weight: 700; color: var(--color-primary); margin-bottom: 4px;">6
+                        </p>
+                        <span class="text-muted">no-cost easy changes</span>
+                    </div>
                 </div>
 
-                <div class="tip-card">
-                    <h2>Reduce Air Conditioning Usage</h2>
+                <!-- 8 TIPS GRID -->
+                <h2 class="section-title" style="margin-bottom: var(--space-md);">All Tips</h2>
+                <div class="card-grid" style="margin-bottom: var(--space-xl);">
 
-                    <p>
-                        Increase your AC temperature slightly and
-                        reduce unnecessary cooling.
-                    </p>
-
-                    <div class="saving">
-                        Save up to $320/year
+                    <div class="card">
+                        <h3>Reduce Air Conditioning Usage</h3>
+                        <p>Increase your AC temperature by 1–2 degrees and use fans first before turning on cooling.</p>
+                        <p style="color: var(--color-primary); font-weight: 600; margin-bottom: var(--space-sm);">Save
+                            up to $320/year</p>
+                        <a href="faq.html#quicktips" class="btn">Learn more</a>
                     </div>
 
-                    <button>Apply Tip</button>
+                    <div class="card">
+                        <h3>Run Pool Pump Off-Peak</h3>
+                        <p>Schedule your pool pump to run during off-peak hours (before 3pm or after 9pm) to reduce
+                            costs.</p>
+                        <p style="color: var(--color-primary); font-weight: 600; margin-bottom: var(--space-sm);">Save
+                            up to $250/year</p>
+                        <a href="faq.html#quicktips" class="btn">Learn more</a>
+                    </div>
+
+                    <div class="card">
+                        <h3>Use Appliances During Daytime</h3>
+                        <p>Run washing machines and dishwashers earlier in the day to avoid peak electricity rates.</p>
+                        <p style="color: var(--color-primary); font-weight: 600; margin-bottom: var(--space-sm);">Save
+                            up to $180/year</p>
+                        <a href="faq.html#quicktips" class="btn">Learn more</a>
+                    </div>
+
+                    <div class="card">
+                        <h3>Turn Off Standby Devices</h3>
+                        <p>Unplug unused electronics and switch off chargers, TVs, and consoles at the wall.</p>
+                        <p style="color: var(--color-primary); font-weight: 600; margin-bottom: var(--space-sm);">Save
+                            up to $120/year</p>
+                        <a href="faq.html#quicktips" class="btn">Learn more</a>
+                    </div>
+
+                    <div class="card">
+                        <h3>Switch to LED Lighting</h3>
+                        <p>Replace halogen or incandescent bulbs with LED alternatives — they use up to 75% less energy.
+                        </p>
+                        <p style="color: var(--color-primary); font-weight: 600; margin-bottom: var(--space-sm);">Save
+                            up to $100/year</p>
+                        <a href="faq.html#quicktips" class="btn">Learn more</a>
+                    </div>
+
+                    <div class="card">
+                        <h3>Wash Clothes in Cold Water</h3>
+                        <p>Switching from hot to cold water for laundry reduces the energy used per wash by up to 90%.
+                        </p>
+                        <p style="color: var(--color-primary); font-weight: 600; margin-bottom: var(--space-sm);">Save
+                            up to $52/year</p>
+                        <a href="faq.html#quicktips" class="btn">Learn more</a>
+                    </div>
+
+                    <div class="card">
+                        <h3>Air Dry Clothes</h3>
+                        <p>Dry clothes naturally on a rack or outdoor line instead of using a clothes dryer.</p>
+                        <p style="color: var(--color-primary); font-weight: 600; margin-bottom: var(--space-sm);">Save
+                            up to $40/year</p>
+                        <a href="faq.html#quicktips" class="btn">Learn more</a>
+                    </div>
+
+                    <div class="card">
+                        <h3>Use Natural Light During the Day</h3>
+                        <p>Open blinds and curtains during daylight hours before switching on artificial lights.</p>
+                        <p style="color: var(--color-primary); font-weight: 600; margin-bottom: var(--space-sm);">Save
+                            up to $20/year</p>
+                        <a href="faq.html#quicktips" class="btn">Learn more</a>
+                    </div>
+
                 </div>
 
-                <div class="tip-card">
-                    <h2>Use Appliances During Daytime</h2>
-
-                    <p>
-                        Running appliances earlier in the day can help
-                        reduce energy costs.
+                <!-- QUICK WINS SECTION — 6 no-cost changes -->
+                <h2 class="section-title" style="margin-bottom: var(--space-md);">Quick Wins — 6 Easy No-Cost Changes
+                </h2>
+                <div class="card">
+                    <p class="text-muted" style="margin-bottom: var(--space-md);">
+                        These 6 actions cost nothing and can be done today.
+                        Small habits can still make a difference over time.
                     </p>
-
-                    <div class="saving">
-                        Save up to $180/year
-                    </div>
-
-                    <button>Apply Tip</button>
-                </div>
-
-                <div class="tip-card">
-                    <h2>Turn Off Standby Devices</h2>
-
-                    <p>
-                        Unplug unused electronics and reduce standby
-                        power consumption.
-                    </p>
-
-                    <div class="saving">
-                        Save up to $120/year
-                    </div>
-
-                    <button>Apply Tip</button>
+                    <ul class="quick-wins-list">
+                        <li>Turn off lights when leaving a room <span>— free</span></li>
+                        <li>Use fans before turning on air conditioning <span>— free</span></li>
+                        <li>Unplug phone chargers when not in use <span>— free</span></li>
+                        <li>Run full loads in the washing machine <span>— free</span></li>
+                        <li>Open curtains during the day to use natural light <span>— free</span></li>
+                        <li>Switch off the TV at the wall instead of leaving it on standby <span>— free</span></li>
+                    </ul>
                 </div>
 
             </div>
+        </section>
+    </main>
 
-            <!-- SUMMARY SECTION -->
-            <div class="summary-boxes">
+    <footer class="site-footer">
+        <p>© 2026 EnergyCheck — NA17 | 2008ICT Design Thinking in IT, Griffith University</p>
+    </footer>
 
-                <div class="summary-card">
-                    <h3>Total Potential Savings</h3>
-
-                    <p>$1,062</p>
-
-                    <span>per year</span>
-                </div>
-
-                <div class="summary-card">
-                    <h3>Tips Available</h3>
-
-                    <p>8</p>
-
-                    <span>actionable items</span>
-                </div>
-
-                <div class="summary-card">
-                    <h3>Quick Wins</h3>
-
-                    <p>6</p>
-
-                    <span>easy changes</span>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
+    <script>
+        // mobile nav toggle (see note in style.css)
+        document.getElementById('navToggle').addEventListener('click', function () {
+            document.getElementById('mainNav').classList.toggle('open');
+        });
+    </script>
 
 </body>
+
 </html>
