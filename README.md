@@ -1,0 +1,483 @@
+[profile.html](https://github.com/user-attachments/files/28064488/profile.html)
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--
+        EnergyCheck — Profile page
+        Author: Ayat Taher Abdul Wahed s5438900, NA17
+
+        Purpose:
+        Allows users to customise household and energy preferences.
+        These preferences influence the personalised recommendations
+        shown on the Tips page.
+
+        Shared team stylesheet used for consistent branding/layout.
+    -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EnergyCheck — Profile</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* PAGE LAYOUT */
+
+        .profile-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--space-lg);
+            align-items: start;
+        }
+
+        .profile-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .profile-avatar {
+            width: 90px;
+            height: 90px;
+            background-color: var(--color-primary);
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            font-weight: 700;
+            margin: 0 auto var(--space-md);
+        }
+
+        .profile-card-center {
+            text-align: center;
+        }
+
+        .energy-score-box {
+            background-color: #edf3ed;
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            margin-top: var(--space-md);
+        }
+
+        .energy-score-box h3 {
+            color: var(--color-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .save-message {
+            color: var(--color-primary);
+            font-weight: 600;
+            margin-top: var(--space-sm);
+        }
+
+        /* HOVER EFFECTS */
+
+        .card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+        }
+
+        .btn {
+            transition: 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* RECOMMENDED CATEGORIES */
+
+        .recommend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .recommend-card {
+            text-align: center;
+        }
+
+        .recommend-card h3 {
+            color: var(--color-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 900px) {
+
+            .profile-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <header class="site-header">
+
+        <span class="brand">⚡ EnergyCheck</span>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav id="mainNav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="comparison.html">Comparison</a>
+            <a href="tips.html">Tips</a>
+            <a href="control.html">Control</a>
+            <a href="alerts.html">Alerts</a>
+            <a href="report.html">Report</a>
+            <a href="profile.html" class="active">Profile</a>
+            <a href="faq.html">FAQ</a>
+            <a href="settings.html">Settings</a>
+        </nav>
+
+    </header>
+
+    <main>
+
+        <section class="page-section">
+
+            <div class="container">
+
+                <!-- PAGE TITLE -->
+
+                <h1 class="section-title">User Profile & Preferences</h1>
+
+                <p class="text-muted" style="margin-bottom: var(--space-lg);">
+                    Manage your household preferences and energy habits.
+                    Your profile settings help EnergyCheck personalise the
+                    recommendations shown on the Tips page.
+                </p>
+
+                <div class="profile-layout">
+
+                    <!-- LEFT SIDE -->
+
+                    <div>
+
+                        <!-- PERSONAL INFORMATION -->
+
+                        <h2 class="section-title">Personal Information</h2>
+
+                        <div class="card">
+
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" placeholder="Enter your full name">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" placeholder="Enter your email">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Household Type</label>
+
+                                <select>
+                                    <option>Apartment</option>
+                                    <option>Townhouse</option>
+                                    <option>Detached House</option>
+                                    <option>Shared Accommodation</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Number of People</label>
+                                <input type="number" placeholder="Number of household members">
+                            </div>
+
+                        </div>
+
+                        <!-- ENERGY PREFERENCES -->
+
+                        <h2 class="section-title" style="margin-top: var(--space-lg);">
+                            Energy Preferences
+                        </h2>
+
+                        <div class="card">
+
+                            <div class="toggle-row">
+
+                                <div class="toggle-label">
+                                    Eco-Friendly Recommendations
+                                    <span class="description">
+                                        Prioritise environmentally friendly tips.
+                                    </span>
+                                </div>
+
+                                <label class="toggle">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+
+                            </div>
+
+                            <div class="toggle-row">
+
+                                <div class="toggle-label">
+                                    Low-Cost Energy Tips
+                                    <span class="description">
+                                        Show affordable recommendations.
+                                    </span>
+                                </div>
+
+                                <label class="toggle">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+
+                            </div>
+
+                            <div class="toggle-row">
+
+                                <div class="toggle-label">
+                                    Renter-Friendly Suggestions
+                                    <span class="description">
+                                        Tips suitable for rental properties.
+                                    </span>
+                                </div>
+
+                                <label class="toggle">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                        <!-- HOUSEHOLD USAGE -->
+
+                        <h2 class="section-title" style="margin-top: var(--space-lg);">
+                            Household Usage
+                        </h2>
+
+                        <div class="card">
+
+                            <div class="form-group">
+                                <label>Air Conditioner Usage</label>
+
+                                <select>
+                                    <option>Low</option>
+                                    <option>Moderate</option>
+                                    <option>High</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Pool Ownership</label>
+
+                                <select>
+                                    <option>No Pool</option>
+                                    <option>Own Pool</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Laundry Frequency</label>
+
+                                <select>
+                                    <option>1–2 times weekly</option>
+                                    <option>3–5 times weekly</option>
+                                    <option>Daily</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <!-- SAVE BUTTON -->
+
+                        <div style="margin-top: var(--space-lg);">
+
+                            <button class="btn">
+                                Save Preferences
+                            </button>
+
+                            <p class="save-message">
+                                Preferences saved successfully.
+                            </p>
+
+                            <p class="text-muted" style="margin-top: var(--space-xs);">
+                                Preferences are used to personalise
+                                energy-saving recommendations.
+                            </p>
+
+                        </div>
+
+                        <!-- RECOMMENDED TIP CATEGORIES -->
+
+                        <h2 class="section-title" style="margin-top: var(--space-xl);">
+                            Recommended Tip Categories
+                        </h2>
+
+                        <div class="recommend-grid">
+
+                            <div class="card recommend-card">
+                                <h3>Cooling Tips</h3>
+                                <p class="text-muted">
+                                    Reduce air conditioner energy usage during summer.
+                                </p>
+                            </div>
+
+                            <div class="card recommend-card">
+                                <h3>Low-Cost Tips</h3>
+                                <p class="text-muted">
+                                    Affordable recommendations for reducing bills.
+                                </p>
+                            </div>
+
+                            <div class="card recommend-card">
+                                <h3>Apartment Friendly</h3>
+                                <p class="text-muted">
+                                    Energy-saving suggestions suitable for renters.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT SIDEBAR -->
+
+                    <div class="profile-sidebar">
+
+                        <!-- USER CARD -->
+
+                        <div class="card profile-card-center">
+
+                            <div class="profile-avatar">
+                                U
+                            </div>
+
+                            <h2>User Profile</h2>
+
+                            <p class="text-muted">
+                                EnergyCheck Resident
+                            </p>
+
+                            <div style="margin-top: var(--space-sm);">
+                                <span class="status-badge low">
+                                    Low Energy Usage
+                                </span>
+                            </div>
+
+                            <div class="energy-score-box">
+
+                                <h3>Energy Score</h3>
+
+                                <p style="margin-bottom: 0;">
+                                    82 / 100
+                                </p>
+
+                                <span class="text-muted">
+                                    Based on current household habits
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <!-- NOTIFICATIONS -->
+
+                        <div class="card">
+
+                            <h2 class="section-title">
+                                Notifications
+                            </h2>
+
+                            <div class="toggle-row">
+
+                                <div class="toggle-label">
+                                    Weekly Energy Alerts
+                                </div>
+
+                                <label class="toggle">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+
+                            </div>
+
+                            <div class="toggle-row">
+
+                                <div class="toggle-label">
+                                    Monthly Reports
+                                </div>
+
+                                <label class="toggle">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+
+                            </div>
+
+                            <div class="toggle-row">
+
+                                <div class="toggle-label">
+                                    High Usage Warnings
+                                </div>
+
+                                <label class="toggle">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+
+    <footer class="site-footer">
+        <p>
+            © 2026 EnergyCheck — NA17 |
+            2008ICT Design Thinking in IT, Griffith University
+        </p>
+    </footer>
+
+    <!-- MOBILE NAVIGATION -->
+
+    <script>
+
+        document.getElementById('navToggle')
+            .addEventListener('click', function () {
+
+                document.getElementById('mainNav')
+                    .classList.toggle('open');
+
+            });
+
+    </script>
+
+</body>
+
+</html>
