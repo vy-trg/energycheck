@@ -1,11 +1,14 @@
-[profile.html](https://github.com/user-attachments/files/28064488/profile.html)
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <!--
         EnergyCheck — Profile page
-        Author: Ayat Taher Abdul Wahed s5438900, NA17
+        Original author: Ayat Taher Abdul Wahed s5438900, NA17
+        Updated by: Vy (Thi Tuong Vy Truong) s5434825, NA17
+        Changes: removed Notifications section (moved to Settings page
+        to avoid duplication), replaced "Save Preferences" button +
+        always-visible success message with a prototype note.
 
         Purpose:
         Allows users to customise household and energy preferences.
@@ -22,7 +25,6 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-
         /* PAGE LAYOUT */
 
         .profile-layout {
@@ -82,7 +84,7 @@
 
         .card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
         }
 
         .btn {
@@ -118,7 +120,6 @@
                 grid-template-columns: 1fr;
             }
         }
-
     </style>
 </head>
 
@@ -304,23 +305,16 @@
 
                         </div>
 
-                        <!-- SAVE BUTTON -->
-
+                        <!-- SAVE BUTTON — updated by Vy.
+                             Original version showed "Preferences saved successfully" permanently,
+                             which appeared before the user clicked anything (looked like a bug).
+                             Replaced with a prototype note explaining this is a front-end prototype. -->
                         <div style="margin-top: var(--space-lg);">
-
-                            <button class="btn">
-                                Save Preferences
-                            </button>
-
-                            <p class="save-message">
-                                Preferences saved successfully.
+                            <button class="btn">Save Preferences</button>
+                            <p class="text-muted" style="margin-top: var(--space-sm);">
+                                This is a front-end prototype — preferences are not saved between visits.
+                                In a live version, your settings would be stored locally on your device.
                             </p>
-
-                            <p class="text-muted" style="margin-top: var(--space-xs);">
-                                Preferences are used to personalise
-                                energy-saving recommendations.
-                            </p>
-
                         </div>
 
                         <!-- RECOMMENDED TIP CATEGORIES -->
@@ -396,53 +390,14 @@
 
                         </div>
 
-                        <!-- NOTIFICATIONS -->
-
+                        <!-- NOTIFICATIONS — removed by Vy to avoid duplication with Settings page.
+                             Notification preferences are managed in settings.html instead. -->
                         <div class="card">
-
-                            <h2 class="section-title">
-                                Notifications
-                            </h2>
-
-                            <div class="toggle-row">
-
-                                <div class="toggle-label">
-                                    Weekly Energy Alerts
-                                </div>
-
-                                <label class="toggle">
-                                    <input type="checkbox" checked>
-                                    <span class="toggle-slider"></span>
-                                </label>
-
-                            </div>
-
-                            <div class="toggle-row">
-
-                                <div class="toggle-label">
-                                    Monthly Reports
-                                </div>
-
-                                <label class="toggle">
-                                    <input type="checkbox" checked>
-                                    <span class="toggle-slider"></span>
-                                </label>
-
-                            </div>
-
-                            <div class="toggle-row">
-
-                                <div class="toggle-label">
-                                    High Usage Warnings
-                                </div>
-
-                                <label class="toggle">
-                                    <input type="checkbox">
-                                    <span class="toggle-slider"></span>
-                                </label>
-
-                            </div>
-
+                            <h2 class="section-title">Notifications</h2>
+                            <p class="text-muted" style="margin-bottom: var(--space-sm);">
+                                Manage your notification preferences in Settings.
+                            </p>
+                            <a href="settings.html#notifications" class="btn btn-outline">Go to Settings →</a>
                         </div>
 
                     </div>
