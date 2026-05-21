@@ -6,7 +6,9 @@
         EnergyCheck — settings page
         Vy (Thi Tuong Vy Truong) s5434825, NA17
         Energy goal, accessibility, notifications, comparison preferences,
-        household profile (static), privacy, about.
+        household profile (link to profile.html), privacy, about.
+        Updated: replaced static household profile card with link to
+        profile.html to avoid duplication with Ayat's Profile page.
     -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -496,37 +498,21 @@
                         </div>
                     </section>
 
-                    <!-- 5. HOUSEHOLD PROFILE — static summary (FR3, NFR7) -->
+                    <!-- 5. HOUSEHOLD PROFILE — updated by Vy.
+                         Original version had a static summary card here.
+                         Moved to profile.html (Ayat's page) to avoid duplication —
+                         Profile page has the full household form with editable fields. -->
                     <section class="card" id="household">
                         <h2 class="settings-section-title">Household Profile</h2>
                         <p class="text-muted" style="margin-bottom: var(--space-md);">
                             Your household profile helps EnergyCheck compare your usage to
-                            similar households accurately (FR3). This is an example profile.
+                            similar households accurately (FR3).
                         </p>
-
-                        <div class="profile-summary">
-                            <div class="profile-item">
-                                <p class="profile-label">Household size</p>
-                                <p class="profile-value">2 people</p>
-                            </div>
-                            <div class="profile-item">
-                                <p class="profile-label">Type of home</p>
-                                <p class="profile-value">Apartment / Unit</p>
-                            </div>
-                            <div class="profile-item">
-                                <p class="profile-label">Postcode</p>
-                                <p class="profile-value">4111</p>
-                            </div>
-                            <div class="profile-item">
-                                <p class="profile-label">Renter</p>
-                                <p class="profile-value">Yes</p>
-                            </div>
-                        </div>
-
-                        <p class="text-muted" style="margin-top: var(--space-md); font-size: 13px;">
-                            In a live version of EnergyCheck, you would be able to update your
-                            profile here. Your data would stay on your device only — no account needed.
+                        <p class="text-muted" style="margin-bottom: var(--space-md);">
+                            Update your household size, home type, and energy preferences
+                            on the Profile page.
                         </p>
+                        <a href="profile.html" class="btn btn-outline">Go to Profile →</a>
                     </section>
 
                     <!-- 6. PRIVACY — Week 10 Human Factors and Security lecture -->
