@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!-- EnergyCheck — Alerts page
+     Original author: Vinoothna Vaddi, s5381413, NA17
+     Updated by: Vy (Thi Tuong Vy Truong) s5434825, NA17
+     Changes: fixed brand tag, added nav IDs for mobile toggle,
+     added mobile nav JS, added class="section-title" to h1. -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerts — EnergyCheck</title>
+    <!-- Shared stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* coloured top border on alert cards to show severity */
+        .alert-card {
+            border-top: 5px solid var(--status-low);
+        }
+
+        .alert-card.warning {
+            border-top-color: var(--status-medium);
+        }
+
+        .alert-card.high {
+            border-top-color: var(--status-high);
+        }
+
+        .alert-icon {
+            font-size: 28px;
+            margin-bottom: var(--space-xs);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER — updated by Vy: changed <div class="brand"> to <span class="brand">,
+         added id="navToggle" and id="mainNav" for mobile nav JS -->
+    <header class="site-header">
+        <span class="brand">⚡ EnergyCheck</span>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav id="mainNav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="comparison.html">Comparison</a>
+            <a href="tips.html">Tips</a>
+            <a href="control.html">Control</a>
+            <a href="alerts.html" class="active">Alerts</a>
+            <a href="report.html">Report</a>
+            <a href="faq.html">FAQ</a>
+            <a href="settings.html">Settings</a>
+            <a href="profile.html">Profile</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container page-section">
+
+            <!-- h1 class added by Vy to match shared section-title style -->
+            <h1 class="section-title">Alerts</h1>
+            <p class="text-muted" style="margin-bottom: var(--space-lg);">
+                View electricity usage alerts and suggested actions.
+            </p>
+
+            <!-- ALERT CARDS — original content by Vinoothna -->
+            <div class="card-grid">
+
+                <div class="card alert-card high">
+                    <div class="alert-icon">⚠️</div>
+                    <span class="status-badge high">High Usage</span>
+                    <h3 style="margin-top: var(--space-sm);">Air Conditioner Usage</h3>
+                    <p class="text-muted">Your cooling usage increased this week.</p>
+                    <p><strong>Suggested Action:</strong> Increase the temperature to 24°C and use fans where possible.
+                    </p>
+                </div>
+
+                <div class="card alert-card warning">
+                    <div class="alert-icon">〜</div>
+                    <span class="status-badge medium">Medium Usage</span>
+                    <h3 style="margin-top: var(--space-sm);">Standby Power</h3>
+                    <p class="text-muted">Devices may still be using electricity overnight.</p>
+                    <p><strong>Suggested Action:</strong> Turn appliances off at the wall before sleeping.</p>
+                </div>
+
+                <div class="card alert-card">
+                    <div class="alert-icon">✅</div>
+                    <span class="status-badge low">Low Usage</span>
+                    <h3 style="margin-top: var(--space-sm);">Energy Savings</h3>
+                    <p class="text-muted">Your electricity usage improved this month.</p>
+                    <p><strong>Suggested Action:</strong> Keep following your current energy-saving habits.</p>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2026 EnergyCheck — NA17 | 2008ICT Design Thinking in IT, Griffith University</p>
+    </footer>
+
+    <!-- mobile nav toggle (see note in style.css) — added by Vy -->
+    <script>
+        document.getElementById('navToggle').addEventListener('click', function () {
+            document.getElementById('mainNav').classList.toggle('open');
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!-- EnergyCheck — Control page
+     Original author: Vinoothna Vaddi, s5381413, NA17
+     Updated by: Vy (Thi Tuong Vy Truong) s5434825, NA17
+     Changes: fixed brand tag, added nav IDs for mobile toggle,
+     added mobile nav JS, fixed section-title usage in cards,
+     cleaned up Quick Actions list markup. -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control — EnergyCheck</title>
+    <!-- Shared Team CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* control/cannot control two-column grid */
+        .control-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        /* bullet list inside control cards — overrides shared ul { list-style: none } */
+        .control-list {
+            margin-top: var(--space-sm);
+            padding-left: var(--space-md);
+        }
+
+        .control-list li {
+            list-style: disc !important;
+            margin-bottom: 8px;
+            font-size: var(--font-size-body);
+        }
+
+        /* quick actions list */
+        .quick-list {
+            margin-top: var(--space-sm);
+            padding-left: var(--space-md);
+        }
+
+        .quick-list li {
+            list-style: disc !important;
+            margin-bottom: 8px;
+            font-size: var(--font-size-body);
+        }
+
+        /* motivational callout box */
+        .message-box {
+            background-color: rgba(46, 125, 50, 0.08);
+            border-left: 4px solid var(--color-primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+
+        .message-box p {
+            margin: 0;
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        @media (max-width: 700px) {
+            .control-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER — updated by Vy: changed <div class="brand"> to <span class="brand">,
+         added id="navToggle" and id="mainNav" for mobile nav JS -->
+    <header class="site-header">
+        <span class="brand">⚡ EnergyCheck</span>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav id="mainNav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="comparison.html">Comparison</a>
+            <a href="tips.html">Tips</a>
+            <a href="control.html" class="active">Control</a>
+            <a href="alerts.html">Alerts</a>
+            <a href="report.html">Report</a>
+            <a href="faq.html">FAQ</a>
+            <a href="settings.html">Settings</a>
+            <a href="profile.html">Profile</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <div class="container page-section">
+
+            <h1 class="section-title">Control</h1>
+            <p class="text-muted" style="margin-bottom: var(--space-lg);">
+                Learn what affects your electricity bills and what actions you can take to reduce energy usage.
+            </p>
+
+            <!-- CAN / CANNOT CONTROL — original content by Vinoothna
+                 Vy updated markup: replaced <p>• text</p> with proper <ul> lists -->
+            <h2 class="section-title">What You Can Control vs What You Can't Control</h2>
+            <div class="control-grid">
+
+                <div class="card">
+                    <h3 style="color: var(--color-primary); margin-bottom: var(--space-sm);">✅ Things You Can Control
+                    </h3>
+                    <ul class="control-list">
+                        <li>Turning lights off when not in use</li>
+                        <li>Using fans before air conditioning</li>
+                        <li>Turning appliances off at the wall</li>
+                        <li>Washing clothes during off-peak hours</li>
+                        <li>Closing blinds during hot afternoons</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 style="color: var(--color-alert); margin-bottom: var(--space-sm);">⛔ Things You Cannot Control
+                    </h3>
+                    <ul class="control-list">
+                        <li>Weather and outdoor temperatures</li>
+                        <li>Old appliances provided by landlords</li>
+                        <li>Poor insulation in apartments</li>
+                        <li>Shared electricity systems</li>
+                        <li>Building design and sun exposure</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- QUICK ACTIONS — original content by Vinoothna
+                 Vy updated markup: replaced <ul><li><p>• text</p></li></ul> with clean <ul> list -->
+            <div class="card">
+                <h2 class="section-title">Quick Actions</h2>
+                <p class="text-muted" style="margin-bottom: var(--space-sm);">
+                    Small changes every day can help lower electricity costs.
+                </p>
+                <ul class="quick-list">
+                    <li>Set air conditioning to 24°C</li>
+                    <li>Unplug chargers when not needed</li>
+                    <li>Use natural sunlight during the day</li>
+                    <li>Switch devices off before sleeping</li>
+                    <li>Avoid leaving appliances on standby</li>
+                </ul>
+            </div>
+
+            <!-- MOTIVATIONAL MESSAGE -->
+            <div class="message-box">
+                <p>Focus on the things you can control. Small changes can still reduce your electricity bills and energy
+                    usage.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2026 EnergyCheck — NA17 | 2008ICT Design Thinking in IT, Griffith University</p>
+    </footer>
+
+    <!-- mobile nav toggle (see note in style.css) — added by Vy -->
+    <script>
+        document.getElementById('navToggle').addEventListener('click', function () {
+            document.getElementById('mainNav').classList.toggle('open');
+        });
+    </script>
+
+</body>
+
+</html>
