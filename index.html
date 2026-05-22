@@ -68,6 +68,11 @@
             display: flex;
             gap: var(--space-md)
         }
+
+        .other-cards {
+            display: flex;
+            gap: var(--space-md);
+        }
     </style>
 </head>
 <body>
@@ -110,6 +115,8 @@
                     <div class="meter-fill"></div>
                 </div>
                 <p>Your Energy Usage is Low</p>
+
+                <p style="font-style: italic; color: #838b85">Your Energy Consumption is similar to other households</p>
             </div>
             
             <div class="sub-cards">
@@ -128,7 +135,7 @@
 
         </div>
 
-        <div class="sub-cards">
+        <div class="other-cards">
             
             <a href="control.html" class="btn btn-outline">What You Can Control</a>
             <a href="tips.html" class="btn btn-outline">Energy Saving Tips</a>
