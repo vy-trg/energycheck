@@ -68,12 +68,10 @@
         <p>© 2026 EnergyCheck — NA17 | 2008ICT Design Thinking in IT, Griffith University</p>
     </footer>
    
-    <script>
-        document.querySelector('.nav-toggle')
-          .addEventListener('click', function() {
-            document.querySelector('.site-header nav')
-              .classList.toggle('open');
-          });
+      <script>
+        document.getElementById('navToggle').addEventListener('click', function () {
+            document.getElementById('mainNav').classList.toggle('open');
+        });
     </script>
 </body>
 </html> 
