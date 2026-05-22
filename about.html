@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<!-- 
-    EnergyCheck - About page
-    Rana Toor s5371045 NA17
-
--->
-
+    <!--
+        EnergyCheck — About page
+        Original author: Rana Toor s5371045, NA17
+        Updated by: Vy (Thi Tuong Vy Truong) s5434825, NA17
+        Changes: fixed <a class="brand"> to <span>, fixed <title>,
+        added section-title to h1, expanded content to include
+        mission, how it works, and team sections.
+    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Home - EnergyCheck</title>
-
+    <!-- fixed by Vy — original title was "Home - EnergyCheck" -->
+    <title>About — EnergyCheck</title>
 </head>
+
 <body>
-    
-    <header class ="site-header">
 
-        <a class = "brand">EnergyCheck</a>
+    <!-- HEADER — updated by Vy: fixed <a class="brand"> to <span class="brand"> -->
+    <header class="site-header">
+        <span class="brand">⚡ EnergyCheck</span>
 
-       <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu">
             <span></span>
             <span></span>
             <span></span>
@@ -37,41 +41,119 @@
             <a href="faq.html">FAQ</a>
             <a href="settings.html">Settings</a>
         </nav>
-    
     </header>
 
     <main>
-
         <div class="container page-section">
 
-            <h1>About EnergyCheck</h1>
+            <!-- section-title added by Vy -->
+            <h1 class="section-title">About EnergyCheck</h1>
+            <p class="text-muted" style="margin-bottom: var(--space-lg);">
+                A simple, renter-friendly tool for understanding your household electricity usage.
+            </p>
 
-            <p class="text-muted">Your go-to website for Energy checking!</p>
+            <!-- OUR PURPOSE — original content by Rana, expanded by Vy -->
+            <section style="margin-bottom: var(--space-lg);">
+                <h2 class="section-title">Our Purpose</h2>
+                <div class="card">
+                    <p>
+                        EnergyCheck helps Australian households — especially renters — understand their
+                        electricity usage without feeling overwhelmed. Many people only notice a problem
+                        when a high bill arrives, and existing tools often present complex data that is
+                        hard to act on.
+                    </p>
+                    <p>
+                        EnergyCheck replaces raw numbers with simple colour-coded indicators, honest
+                        comparisons with similar households, and practical tips that work within the
+                        constraints of renting.
+                    </p>
+                    <p style="margin: 0;">
+                        No login required. No technical jargon. Just clear, useful information.
+                    </p>
+                </div>
+            </section>
 
-            <div class="card" style="margin-top: var(--space-md);">
-                <h2>Our Purpose</h2>
-                <p>
-                    EnergyCheck helps you to track daily electricity usage, compare energy consumption patterns, and discover actionable
-                    tips to lower your bills and energy usage.
-                </p>
+            <!-- HOW IT WORKS — added by Vy -->
+            <section style="margin-bottom: var(--space-lg);">
+                <h2 class="section-title">How It Works</h2>
+                <div class="card-grid">
 
-                <h2>Tracking Energy</h2>
-                <p>Nowadays, energy bills always show a increase for seemingly no reason at all. This website provides a solution to that issue. By tracking your energy usage you can see whether your energy usage is low, medium or high compared to other households. You'll also learn about what you can control and cannot control in regards to lowering your energy usage. Tips are also given for further clarity on what you can do to help your energy expenditure.</p>
-            </div>
+                    <div class="card">
+                        <h3 style="color: var(--color-primary); margin-bottom: var(--space-xs);">1. Check your status
+                        </h3>
+                        <p class="text-muted" style="margin: 0;">
+                            The Home page shows your current electricity usage with a
+                            simple green, amber, or red indicator so you know at a glance
+                            whether your usage is low, medium, or high.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="color: var(--color-primary); margin-bottom: var(--space-xs);">2. Compare fairly</h3>
+                        <p class="text-muted" style="margin: 0;">
+                            The Comparison page shows how your usage stacks up against
+                            similar households — not just the average of everyone, but
+                            households like yours.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="color: var(--color-primary); margin-bottom: var(--space-xs);">3. Take action</h3>
+                        <p class="text-muted" style="margin: 0;">
+                            The Tips and Control pages give you realistic, renter-appropriate
+                            advice — things you can actually do without needing landlord
+                            approval.
+                        </p>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- BUILT FOR RENTERS — added by Vy, aligned with NFR7 -->
+            <section style="margin-bottom: var(--space-lg);">
+                <h2 class="section-title">Built for Renters</h2>
+                <div class="card">
+                    <p>
+                        Unlike many energy tools, EnergyCheck is designed specifically with renters in mind.
+                        We understand that renters cannot always change insulation, replace appliances, or
+                        install solar panels — so every tip and recommendation focuses on what you
+                        <em>can</em> control.
+                    </p>
+                    <p style="margin: 0;">
+                        EnergyCheck does not collect or store your personal data.
+                        All preferences stay on your device only.
+                    </p>
+                </div>
+            </section>
+
+            <!-- TEAM — added by Vy -->
+            <section>
+                <h2 class="section-title">The Team</h2>
+                <div class="card">
+                    <p>
+                        EnergyCheck was designed and built by Group NA17 as part of
+                        2008ICT Design Thinking in IT at Griffith University, Trimester 1, 2026.
+                    </p>
+                    <p style="margin: 0; color: var(--color-text-light); font-size: var(--font-size-small);">
+                        Thi Tuong Vy Truong &nbsp;•&nbsp; Yuxin Wang &nbsp;•&nbsp;
+                        Ayat Taher Abdul Wahed &nbsp;•&nbsp; Vinoothna Vaddi &nbsp;•&nbsp; Rana Toor
+                    </p>
+                </div>
+            </section>
 
         </div>
-
     </main>
- 
 
     <footer class="site-footer">
         <p>© 2026 EnergyCheck — NA17 | 2008ICT Design Thinking in IT, Griffith University</p>
     </footer>
-   
-      <script>
+
+    <script>
         document.getElementById('navToggle').addEventListener('click', function () {
             document.getElementById('mainNav').classList.toggle('open');
         });
     </script>
+
 </body>
-</html> 
+
+</html>
