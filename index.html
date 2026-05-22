@@ -13,6 +13,14 @@
     <title>Home - EnergyCheck</title>
 
     <style>
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-lg) var(--space-md);
+        }
         
 
         .meter-card {
@@ -51,11 +59,14 @@
         .meter-fill {
             height: 100%;
             border-radius: 15px;
+            width: 28%; 
+            background: linear-gradient(90deg, #2E7D32, #4caf50);
         }
+
 
         .sub-cards {
             display: flex;
-            gap: 16px;
+            gap: var(--space-md)
         }
     </style>
 </head>
@@ -86,39 +97,49 @@
     
     </header>
 
-    <div class="card meter-card">
+    <div class="wrapper">
+        <div class="card meter-card">
 
-        <div class="meter-container">
-            <div class="meter-text">
-                <span>Energy Usage</span>
-                <span>280 kWh</span>
-            </div>
+            <div class="meter-container">
+                <div class="meter-text">
+                    <span>Energy Usage</span>
+                    <span>280 kWh</span>
+                </div>
 
-            <div class="meter-bar">
-                <div class="meter-fill" style="width: 28%; background: linear-gradient(90deg, #2E7D32, #4caf50);"></div>
+                <div class="meter-bar">
+                    <div class="meter-fill"></div>
+                </div>
+                <p>Your Energy Usage is Low</p>
             </div>
-            <p>Your Energy Usage is Low</p>
-        </div>
-        
-        <div class="sub-cards">
-            <div class="card sub-card">
-                <h3>Last Month</h3>
-                <p>490 kWh total Usage</p>
-            </div>
+            
+            <div class="sub-cards">
+                <div class="card sub-card">
+                    <h3>Last Month</h3>
+                    <p>490 kWh total Usage</p>
+                </div>
 
-            <div class="card sub-card">
-                <h3>This Month</h3>
-                <p>280 kWh used so far</p>
+                <div class="card sub-card">
+                    <h3>This Month</h3>
+                    <p>280 kWh used so far</p>
+                </div>
             </div>
-        </div>
- 
-        <a href="comparison.html" class="btn btn-outline" style="margin-top: 16px;">View Detailed Comparison</a>
-
-    </div>
     
+            <a href="comparison.html" class="btn btn-outline" style="margin-top: 16px;">View Detailed Comparison</a>
+
+        </div>
+
+        <div class="sub-cards">
+            
+            <a href="control.html" class="btn btn-outline">What You Can Control</a>
+            <a href="tips.html" class="btn btn-outline">Energy Saving Tips</a>
+
+
+
+        </div>
+    </div>
 
     <footer class="site-footer">
-
+        <p>© 2026 EnergyCheck — NA17 | 2008ICT Design Thinking in IT, Griffith University</p>
     </footer>
    
     <script>
