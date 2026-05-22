@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 
+    EnergyCheck - About page
+    Rana Toor s5371045 NA17
+
+-->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Home - EnergyCheck</title>
+    
+</head>
+<body>
+    
+    <header class ="site-header">
+
+        <a class = "brand">EnergyCheck</a>
+
+        <button class="nav-toggle" aria-label="Open menu">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav>
+            <a class="active" href="#">Home</a>
+            <a href="">Comparison</a>
+            <a href="#">Control</a>
+            <a href="#">Tips</a>
+            <a href="#">About</a>
+        </nav>
+    
+    </header>
+
+    <main>
+
+        <div class="container page-section">
+
+            <h1>About EnergyCheck</h1>
+
+            <p class="text-muted">Your go-to website for Energy checking!</p>
+
+            <div class="card" style="margin-top: var(--space-md);">
+                <h2>Our Purpose</h2>
+                <p>
+                    EnergyCheck helps you to track daily electricity usage, compare energy consumption patterns, and discover actionable
+                    tips to lower your bills and energy usage.
+                </p>
+
+                <h2>Tracking Energy</h2>
+                <p>Nowadays, energy bills always show a increase for seemingly no reason at all. This website provides a solution to that issue. By tracking your energy usage you can see whether your energy usage is low, medium or high compared to other households. You'll also learn about what you can control and cannot control in regards to lowering your energy usage. Tips are also given for further clarity on what you can do to help your energy expenditure.</p>
+            </div>
+
+        </div>
+
+    </main>
+ 
+
+    <footer class="site-footer">
+        <p>&copy; 2026 EnergyCheck</p>
+    </footer>
+   
+    <script>
+        document.querySelector('.nav-toggle')
+          .addEventListener('click', function() {
+            document.querySelector('.site-header nav')
+              .classList.toggle('open');
+          });
+    </script>
+</body>
+</html> 
