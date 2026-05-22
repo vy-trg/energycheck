@@ -1,85 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<!-- 
-    EnergyCheck - Home page
-    Rana Toor s5371045 NA17
-
--->
-
+    <!--
+        EnergyCheck — Home page
+        Original author: Rana Toor s5371045, NA17
+        Updated by: Vy (Thi Tuong Vy Truong) s5434825, NA17
+        Changes: fixed <a class="brand"> to <span>, added <main> tag,
+        added FR1 colour-coded status badge, added billing period context,
+        added comparison context text, improved layout to align with
+        Assignment 1 prototype (Section 6, Figure 5).
+    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Home - EnergyCheck</title>
+    <title>Home — EnergyCheck</title>
 
     <style>
-
-        .wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: var(--space-md);
-            padding: var(--space-lg) var(--space-md);
-        }
-        
-
-        .meter-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        /* hero section — centre the meter card on the page */
+        .hero {
+            padding-top: var(--space-xl);
+            padding-bottom: var(--space-lg);
             text-align: center;
-            width: fit-content;
-            margin: var(--space-lg) auto;
         }
 
-        .meter-container {
-            width: 100%;
-            max-width: 300px;
-            font-family: var(--font-main);
-            margin-bottom: var(--space-sm);
+        /* energy meter bar */
+        .meter-wrap {
+            margin: var(--space-md) auto;
+            max-width: 340px;
         }
 
-        .meter-text{
+        .meter-labels {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 8px;
+            font-size: var(--font-size-small);
             font-weight: 600;
             color: var(--color-text);
+            margin-bottom: 6px;
         }
 
         .meter-bar {
             width: 100%;
-            height: 25px;
+            height: 24px;
             background-color: var(--color-border);
-            border-radius: 15px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
         }
 
         .meter-fill {
             height: 100%;
-            border-radius: 15px;
-            width: 28%; 
+            border-radius: 12px;
+            width: 28%;
+            background-color: var(--status-low);
+            /* linear-gradient: self-directed learning — adds depth to the bar.
+               Source: MDN Web Docs, linear-gradient() */
             background: linear-gradient(90deg, #2E7D32, #4caf50);
         }
 
-
-        .sub-cards {
+        .meter-scale {
             display: flex;
-            gap: var(--space-md)
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--color-text-light);
+            margin-top: 4px;
         }
 
-        .other-cards {
+        /* summary stat cards below the meter */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: var(--space-sm);
+            margin: var(--space-md) auto;
+            max-width: 600px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: var(--space-sm);
+        }
+
+        .stat-card .stat-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 2px;
+        }
+
+        .stat-card .stat-label {
+            font-size: var(--font-size-small);
+            color: var(--color-text-light);
+        }
+
+        /* context callout */
+        .context-box {
+            background-color: rgba(46, 125, 50, 0.07);
+            border-left: 4px solid var(--color-primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: var(--space-sm) var(--space-md);
+            margin: var(--space-md) auto;
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .context-box p {
+            margin: 0;
+            font-size: var(--font-size-small);
+            color: var(--color-text);
+        }
+
+        /* action buttons row */
+        .action-row {
             display: flex;
-            gap: var(--space-md);
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            justify-content: center;
+            margin-top: var(--space-md);
+        }
+
+        @media (max-width: 600px) {
+            .stat-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
     </style>
 </head>
-<body>
-    
-    <header class ="site-header">
 
-        <a class = "brand">EnergyCheck</a>
+<body>
+
+    <!-- HEADER — updated by Vy: fixed <a class="brand"> to <span class="brand"> -->
+    <header class="site-header">
+        <span class="brand">⚡ EnergyCheck</span>
 
         <button class="nav-toggle" id="navToggle" aria-label="Open menu">
             <span></span>
@@ -87,74 +137,101 @@
             <span></span>
         </button>
 
-       <nav id="mainNav">
-        <a href="index.html" class="active">Home</a>
-        <a href="about.html">About</a>
-        <a href="comparison.html">Comparison</a>
-        <a href="tips.html">Tips</a>
-        <a href="control.html">Control</a>
-        <a href="alerts.html">Alerts</a>
-        <a href="report.html">Report</a>
-        <a href="profile.html">Profile</a>
-        <a href="faq.html">FAQ</a>
-        <a href="settings.html">Settings</a>
-    </nav>
-    
+        <nav id="mainNav">
+            <a href="index.html" class="active">Home</a>
+            <a href="about.html">About</a>
+            <a href="comparison.html">Comparison</a>
+            <a href="tips.html">Tips</a>
+            <a href="control.html">Control</a>
+            <a href="alerts.html">Alerts</a>
+            <a href="report.html">Report</a>
+            <a href="profile.html">Profile</a>
+            <a href="faq.html">FAQ</a>
+            <a href="settings.html">Settings</a>
+        </nav>
     </header>
 
-    <div class="wrapper">
-        <h1>Your Energy Dashboard</h1>
-        <p style="font-style: italic; color: #838b85">Current Billing Period: 01/30/26 - 02/30/26</p>
-        <div class="card meter-card">
+    <!-- MAIN — added by Vy; original used <div class="wrapper"> without <main> -->
+    <main>
+        <div class="container">
 
-            <div class="meter-container">
-                <div class="meter-text">
-                    <span>Energy Usage</span>
-                    <span>280 kWh</span>
+            <!-- HERO — energy meter section (FR1) -->
+            <section class="hero">
+
+                <h1>Your Energy Usage</h1>
+                <p class="text-muted" style="margin-top: 4px; margin-bottom: var(--space-md);">
+                    Billing period: May 2026
+                </p>
+
+                <!-- FR1 — colour-coded status badge added by Vy -->
+                <span class="status-badge low">Low Usage</span>
+
+                <!-- energy meter bar — original by Rana, layout updated by Vy -->
+                <div class="meter-wrap">
+                    <div class="meter-labels">
+                        <span>Energy Usage</span>
+                        <span>280 kWh</span>
+                    </div>
+                    <div class="meter-bar">
+                        <div class="meter-fill"></div>
+                    </div>
+                    <div class="meter-scale">
+                        <span>0</span>
+                        <span>Low</span>
+                        <span>Medium</span>
+                        <span>High</span>
+                        <span>1000 kWh</span>
+                    </div>
                 </div>
 
-                <div class="meter-bar">
-                    <div class="meter-fill"></div>
+                <!-- stat cards — original by Rana, updated to 3 cards by Vy to
+                     add comparison context (FR3) -->
+                <div class="stat-grid">
+                    <div class="card stat-card">
+                        <p class="stat-value">490 kWh</p>
+                        <p class="stat-label">Last month</p>
+                    </div>
+                    <div class="card stat-card">
+                        <p class="stat-value">280 kWh</p>
+                        <p class="stat-label">This month so far</p>
+                    </div>
+                    <div class="card stat-card">
+                        <p class="stat-value">438 kWh</p>
+                        <p class="stat-label">Similar households</p>
+                    </div>
                 </div>
-                <p style="margin-top: var(--space-sm); ">Your Energy Usage is  <span class="status-badge low"> Low</span></p>
 
-                <p style="font-style: italic; color: #838b85">Your Energy Consumption is similar to other households</p>
-            </div>
-            
-            <div class="sub-cards">
-                <div class="card sub-card">
-                    <h3>Last Month</h3>
-                    <p>490 kWh total Usage</p>
+                <!-- context box — added by Vy to address evaluator feedback:
+                     "graphs need more context so users know if usage is good or bad" -->
+                <div class="context-box">
+                    <p>
+                        Your usage this month is <strong>below average</strong> compared to similar households.
+                        Similar 2-person apartments in your area use around 438 kWh per month.
+                    </p>
                 </div>
 
-                <div class="card sub-card">
-                    <h3>This Month</h3>
-                    <p>280 kWh used so far</p>
+                <!-- action buttons — original by Rana, updated to use shared .btn class -->
+                <div class="action-row">
+                    <a href="comparison.html" class="btn">View Detailed Comparison</a>
+                    <a href="control.html" class="btn btn-outline">What You Can Control</a>
+                    <a href="tips.html" class="btn btn-outline">Energy Saving Tips</a>
                 </div>
-            </div>
-    
-            <a href="comparison.html" class="btn btn-outline" style="margin-top: 16px;">View Detailed Comparison</a>
+
+            </section>
 
         </div>
-
-        <div class="other-cards">
-            
-            <a href="control.html" class="btn btn-outline">What You Can Control</a>
-            <a href="tips.html" class="btn btn-outline">Energy Saving Tips</a>
-
-
-
-        </div>
-    </div>
+    </main>
 
     <footer class="site-footer">
         <p>© 2026 EnergyCheck — NA17 | 2008ICT Design Thinking in IT, Griffith University</p>
     </footer>
-   
+
     <script>
         document.getElementById('navToggle').addEventListener('click', function () {
             document.getElementById('mainNav').classList.toggle('open');
         });
     </script>
+
 </body>
-</html> 
+
+</html>
