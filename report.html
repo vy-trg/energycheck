@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!--
         EnergyCheck — usage report page
@@ -14,36 +15,16 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-        /* year selector tabs */
-        .month-tabs {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-xs);
-            margin-bottom: var(--space-md);
-        }
-
-        .month-tab {
-            padding: 8px 16px;
+        /* year label — static, no tabs needed for a front-end only site */
+        .year-label {
+            display: inline-block;
+            padding: 6px 16px;
             border-radius: var(--radius-md);
-            border: 1.5px solid var(--color-border);
-            background-color: var(--color-white);
-            font-family: var(--font-main);
-            font-size: var(--font-size-small);
-            cursor: pointer;
-            color: var(--color-text);
-            transition: border-color 0.2s, background-color 0.2s; /* MDN */
-        }
-
-        .month-tab:hover {
-            border-color: var(--color-primary);
-            color: var(--color-primary);
-        }
-
-        .month-tab.active {
             background-color: var(--color-primary);
             color: var(--color-white);
-            border-color: var(--color-primary);
+            font-size: var(--font-size-small);
             font-weight: 600;
+            margin-bottom: var(--space-md);
         }
 
         /* stat summary cards */
@@ -58,7 +39,7 @@
             background-color: var(--color-white);
             border-radius: var(--radius-md);
             padding: var(--space-md);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             text-align: center;
         }
 
@@ -107,7 +88,8 @@
             width: 100%;
             border-radius: var(--radius-sm) var(--radius-sm) 0 0;
             min-height: 4px;
-            transition: opacity 0.2s; /* MDN — dims bar on hover */
+            transition: opacity 0.2s;
+            /* MDN — dims bar on hover */
         }
 
         .bar:hover {
@@ -115,9 +97,17 @@
         }
 
         /* bar colour matches the FR1 status indicator */
-        .bar.low    { background-color: var(--status-low); }
-        .bar.medium { background-color: var(--status-medium); }
-        .bar.high   { background-color: var(--status-high); }
+        .bar.low {
+            background-color: var(--status-low);
+        }
+
+        .bar.medium {
+            background-color: var(--status-medium);
+        }
+
+        .bar.high {
+            background-color: var(--status-high);
+        }
 
         .bar-value {
             font-size: 11px;
@@ -168,7 +158,7 @@
             background-color: var(--color-white);
             border-radius: var(--radius-md);
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
         .usage-table th {
@@ -191,12 +181,12 @@
         }
 
         .usage-table tr:hover td {
-            background-color: rgba(46,125,50,0.04);
+            background-color: rgba(46, 125, 50, 0.04);
         }
 
         /* callout box — used to add context below the chart */
         .context-box {
-            background-color: rgba(46,125,50,0.07);
+            background-color: rgba(46, 125, 50, 0.07);
             border-left: 4px solid var(--color-primary);
             border-radius: 0 var(--radius-md) var(--radius-md) 0;
             padding: var(--space-md);
@@ -224,6 +214,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- shared header — copy this block into every page,
@@ -254,7 +245,7 @@
     <main>
         <div class="container page-section">
 
-            <h1>Usage Report</h1>
+            <h1 class="section-title">Usage Report</h1>
             <p class="text-muted" style="margin-top: 8px; margin-bottom: var(--space-lg);">
                 Track your electricity usage month by month and understand your patterns over time.
             </p>
@@ -271,10 +262,7 @@
                     compared to similar households.
                 </p>
 
-                <div class="month-tabs">
-                    <button class="month-tab">2025</button>
-                    <button class="month-tab active">2026</button>
-                </div>
+                <span class="year-label">2026</span>
 
                 <div class="card">
                     <!-- heights are percentages relative to the tallest bar (Jul = 680 kWh = 100%) -->
@@ -452,10 +440,10 @@
                     <div>
                         <h3>Want to keep a copy?</h3>
                         <p class="text-muted" style="margin: 0;">
-                            Use your browser's print function (Ctrl+P / Cmd+P) to save this report as a PDF.
+                            Use your browser's print function — press <strong>Ctrl+P</strong> on Windows
+                            or <strong>Cmd+P</strong> on Mac — then choose "Save as PDF" to save this report.
                         </p>
                     </div>
-                    <button class="btn" onclick="window.print()">Print / Save as PDF</button>
                 </div>
             </section>
 
@@ -468,10 +456,11 @@
 
     <script>
         // mobile nav toggle (see note in style.css)
-        document.getElementById('navToggle').addEventListener('click', function() {
+        document.getElementById('navToggle').addEventListener('click', function () {
             document.getElementById('mainNav').classList.toggle('open');
         });
     </script>
 
 </body>
+
 </html>
