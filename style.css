@@ -14,25 +14,29 @@
    section 5.2.3 of our design document */
 :root {
     /* brand colours */
-    --color-primary:    #2E7D32;   /* Forest Green */
-    --color-secondary:  #FFBF00;   /* Amber */
-    --color-alert:      #F01E2C;   /* Red */
-    --color-bg:         #F5F5F5;   /* Off-White */
-    --color-white:      #FFFFFF;
-    --color-text:       #1A1A1A;
+    --color-primary: #2E7D32;
+    /* Forest Green */
+    --color-secondary: #FFBF00;
+    /* Amber */
+    --color-alert: #F01E2C;
+    /* Red */
+    --color-bg: #F5F5F5;
+    /* Off-White */
+    --color-white: #FFFFFF;
+    --color-text: #1A1A1A;
     --color-text-light: #555555;
-    --color-border:     #DDDDDD;
+    --color-border: #DDDDDD;
 
     /* status colours for FR1 (green/amber/red indicator) */
-    --status-low:    #2E7D32;
+    --status-low: #2E7D32;
     --status-medium: #FFBF00;
-    --status-high:   #F01E2C;
+    --status-high: #F01E2C;
 
     /* typography */
-    --font-main:       'Poppins', Helvetica, Roboto, sans-serif;
-    --font-size-h1:    32px;
-    --font-size-h2:    24px;
-    --font-size-body:  16px;
+    --font-main: 'Poppins', Helvetica, Roboto, sans-serif;
+    --font-size-h1: 32px;
+    --font-size-h2: 24px;
+    --font-size-body: 16px;
     --font-size-small: 14px;
 
     /* spacing on an 8px grid */
@@ -47,12 +51,14 @@
     --radius-lg: 16px;
 
     --nav-height: 60px;
-    --max-width:  1100px;
+    --max-width: 1100px;
 }
 
 
 /* reset — zeroing default browser margin/padding so layout is consistent */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -136,9 +142,11 @@ p {
     align-items: center;
     padding-left: var(--space-md);
     padding-right: var(--space-md);
+    position: relative;
+    /* needed so mobile nav dropdown positions correctly */
     /* box-shadow from MDN — gives the nav a slight lift so it
        reads as separate from the page content below */
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .site-header .brand {
@@ -169,12 +177,12 @@ p {
 }
 
 .site-header nav a:hover {
-    background-color: rgba(255,255,255,0.15);
+    background-color: rgba(255, 255, 255, 0.15);
     text-decoration: none;
 }
 
 .site-header nav a.active {
-    background-color: rgba(255,255,255,0.25);
+    background-color: rgba(255, 255, 255, 0.25);
     font-weight: 600;
 }
 
@@ -225,7 +233,7 @@ p {
         align-items: flex-start;
         padding: var(--space-sm) var(--space-md);
         gap: 4px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 
     /* JS in each page adds .open to show the menu */
@@ -291,7 +299,8 @@ p {
     font-size: var(--font-size-body);
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s; /* MDN — same idea as nav hover */
+    transition: background-color 0.2s;
+    /* MDN — same idea as nav hover */
 }
 
 .btn:hover {
@@ -325,7 +334,8 @@ p {
     background-color: var(--color-white);
     border-radius: var(--radius-md);
     padding: var(--space-md);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* MDN box-shadow */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    /* MDN box-shadow */
 }
 
 .card-grid {
@@ -345,9 +355,18 @@ p {
     color: var(--color-white);
 }
 
-.status-badge.low    { background-color: var(--status-low); }
-.status-badge.medium { background-color: var(--status-medium); color: var(--color-text); }
-.status-badge.high   { background-color: var(--status-high); }
+.status-badge.low {
+    background-color: var(--status-low);
+}
+
+.status-badge.medium {
+    background-color: var(--status-medium);
+    color: var(--color-text);
+}
+
+.status-badge.high {
+    background-color: var(--status-high);
+}
 
 
 /* form elements — used on the Settings page */
@@ -374,7 +393,8 @@ p {
     font-size: var(--font-size-body);
     background-color: var(--color-white);
     color: var(--color-text);
-    transition: border-color 0.2s; /* highlights the focused field */
+    transition: border-color 0.2s;
+    /* highlights the focused field */
 }
 
 .form-group input:focus,
@@ -448,14 +468,15 @@ p {
     bottom: 3px;
     background-color: var(--color-white);
     border-radius: 50%;
-    transition: transform 0.2s; /* slides the circle across when toggled */
+    transition: transform 0.2s;
+    /* slides the circle across when toggled */
 }
 
-.toggle input:checked + .toggle-slider {
+.toggle input:checked+.toggle-slider {
     background-color: var(--color-primary);
 }
 
-.toggle input:checked + .toggle-slider::before {
+.toggle input:checked+.toggle-slider::before {
     transform: translateX(22px);
 }
 
@@ -464,11 +485,11 @@ p {
    Overriding the variables here means every element updates automatically
    without needing separate dark-mode rules for each one. */
 body.dark-mode {
-    --color-bg:         #1A1A1A;
-    --color-text:       #F0F0F0;
+    --color-bg: #1A1A1A;
+    --color-text: #F0F0F0;
     --color-text-light: #AAAAAA;
-    --color-border:     #444444;
-    --color-white:      #2A2A2A;
+    --color-border: #444444;
+    --color-white: #2A2A2A;
 }
 
 body.dark-mode .site-header,
@@ -478,7 +499,7 @@ body.dark-mode .site-footer {
 
 body.dark-mode .card {
     background-color: #2A2A2A;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* ============================================================
@@ -506,11 +527,9 @@ body::after {
 /* full-screen overlay — fades from opaque to transparent */
 body::before {
     inset: 0;
-    background: radial-gradient(
-            circle at center,
+    background: radial-gradient(circle at center,
             rgba(46, 125, 50, 0.10),
-            transparent 40%
-        ),
+            transparent 40%),
         var(--color-bg);
     animation: energycheck-overlay 0.9s ease forwards;
 }
@@ -530,19 +549,45 @@ body::after {
 }
 
 @keyframes energycheck-overlay {
-    0%,  55% { opacity: 1; visibility: visible; }
-    100%     { opacity: 0; visibility: hidden;  }
+
+    0%,
+    55% {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
 }
 
 @keyframes energycheck-logo {
-    0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.80); }
-    35%  { opacity: 1; transform: translate(-50%, -50%) scale(1);    }
-    65%  { opacity: 1; transform: translate(-50%, -50%) scale(1);    }
-    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.06); visibility: hidden; }
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.80);
+    }
+
+    35% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    65% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.06);
+        visibility: hidden;
+    }
 }
 
 /* accessibility — respect reduced-motion OS preference */
 @media (prefers-reduced-motion: reduce) {
+
     body::before,
     body::after {
         animation-duration: 0.01ms;
