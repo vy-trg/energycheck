@@ -3,7 +3,9 @@
      Original author: Vinoothna Vaddi, s5381413, NA17
      Updated by: Vy (Thi Tuong Vy Truong) s5434825, NA17
      Changes: fixed brand tag, added nav IDs for mobile toggle,
-     added mobile nav JS, added class="section-title" to h1. -->
+     added mobile nav JS, added class="section-title" to h1,
+     added intro text explaining alerts purpose (FR9, NFR5),
+     added 4th alert card (Peak Hour Usage) for more coverage. -->
 <html lang="en">
 
 <head>
@@ -67,10 +69,12 @@
             <!-- h1 class added by Vy to match shared section-title style -->
             <h1 class="section-title">Alerts</h1>
             <p class="text-muted" style="margin-bottom: var(--space-lg);">
-                View electricity usage alerts and suggested actions.
+                EnergyCheck monitors your usage patterns and flags anything unusual.
+                Each alert includes a suggested action to help you respond quickly
+                without feeling overwhelmed (FR9, NFR5).
             </p>
 
-            <!-- ALERT CARDS — original content by Vinoothna -->
+            <!-- ALERT CARDS — original 3 cards by Vinoothna, 4th card added by Vy -->
             <div class="card-grid">
 
                 <div class="card alert-card high">
@@ -88,6 +92,15 @@
                     <h3 style="margin-top: var(--space-sm);">Standby Power</h3>
                     <p class="text-muted">Devices may still be using electricity overnight.</p>
                     <p><strong>Suggested Action:</strong> Turn appliances off at the wall before sleeping.</p>
+                </div>
+
+                <div class="card alert-card warning">
+                    <div class="alert-icon">⏰</div>
+                    <span class="status-badge medium">Warning</span>
+                    <h3 style="margin-top: var(--space-sm);">Peak Hour Usage</h3>
+                    <p class="text-muted">Some appliances were used during peak electricity times (3–9 PM).</p>
+                    <p><strong>Suggested Action:</strong> Run washing machines and dishwashers later in the evening if
+                        possible.</p>
                 </div>
 
                 <div class="card alert-card">
