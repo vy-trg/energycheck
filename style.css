@@ -142,8 +142,6 @@ p {
     align-items: center;
     padding-left: var(--space-md);
     padding-right: var(--space-md);
-    position: relative;
-    /* needed so mobile nav dropdown positions correctly */
     /* box-shadow from MDN — gives the nav a slight lift so it
        reads as separate from the page content below */
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
@@ -186,16 +184,7 @@ p {
     font-weight: 600;
 }
 
-/* NOTE FOR TEAM: to make the mobile menu work, paste this before </body> in your HTML file:
 
-   <script>
-     document.querySelector('.nav-toggle')
-       .addEventListener('click', function() {
-         document.querySelector('.site-header nav')
-           .classList.toggle('open');
-       });
-   </script>
-*/
 
 /* hamburger button — only shows on mobile, hidden on desktop */
 .nav-toggle {
