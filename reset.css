@@ -1,0 +1,99 @@
+/*
+    EnergyCheck — reset stylesheet
+    Author: Vy (Thi Tuong Vy Truong)
+    Loaded before style.css on every page.
+
+    Normalises default browser styles so the site looks consistent
+    across Chrome, Firefox, Safari, and Edge.
+    Based on Andy Bell's modern CSS reset (piccalil.li/blog/a-modern-css-reset).
+*/
+
+/* remove default margin and padding; border-box sizing on everything */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* prevent font size inflation on mobile */
+html {
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+}
+
+/* smooth scrolling unless the user prefers reduced motion */
+html:focus-within {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+        scroll-behavior: auto;
+    }
+}
+
+/* sensible body defaults */
+body {
+    min-height: 100vh;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* block-level media defaults */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+/* inherit fonts for form elements — browsers don't do this by default */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* avoid text overflow on long words */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+/* remove list styles on ul and ol with a list role —
+   VoiceOver won't announce them as lists otherwise */
+ul[role='list'],
+ol[role='list'] {
+    list-style: none;
+}
+
+/* remove default button styles — styled individually */
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* anchor colour inherits from parent by default */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* table borders collapse cleanly */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
