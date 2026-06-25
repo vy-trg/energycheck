@@ -2,10 +2,11 @@
     EnergyCheck — nav.js
     Author: Thi Tuong Vy Truong
 
-    Handles three things:
+    Handles four things:
     1. Hamburger menu toggle on mobile
-    2. Dark mode — reads Settings radio button + persists via localStorage
-    3. Active nav link — highlights the current page in the nav
+    2. Dark mode — reads Settings radio + persists via localStorage
+    3. Text size — reads Settings radio + persists via localStorage
+    4. Active nav link — highlights the current page in the nav
 */
 
 (function () {
@@ -39,54 +40,60 @@
 
     /* ── 2. DARK MODE ──────────────────────────────────────────── */
 
-    const saved = localStorage.getItem('ec-theme');
+    const savedTheme = localStorage.getItem('ec-theme');
     const osPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    /* apply theme on every page load:
-       saved preference wins; OS preference is the fallback */
-    if (saved === 'dark' || (!saved && osPrefersDark)) {
+    if (savedTheme === 'dark' || (!savedTheme && osPrefersDark)) {
         document.body.classList.add('dark-mode');
-    } else if (saved === 'contrast') {
+    } else if (savedTheme === 'contrast') {
         document.body.classList.add('high-contrast');
     }
 
-    /* listen for the colour theme radio buttons on settings.html */
     document.querySelectorAll('input[name="colourTheme"]').forEach(function (radio) {
-
-        /* derive the active theme from saved value or OS preference —
-           check matchMedia directly, not body class, since this runs
-           before the class is applied above in some browsers */
-        const activeTheme = saved === 'contrast' ? 'contrast'
-            : (saved === 'dark' || (!saved && osPrefersDark)) ? 'dark'
-            : saved === 'default' ? 'default'
+        const activeTheme = savedTheme === 'contrast' ? 'contrast'
+            : (savedTheme === 'dark' || (!savedTheme && osPrefersDark)) ? 'dark'
             : 'default';
 
-        if (radio.value === activeTheme) {
-            radio.checked = true;
-        }
+        if (radio.value === activeTheme) radio.checked = true;
 
         radio.addEventListener('change', function () {
             document.body.classList.remove('dark-mode', 'high-contrast');
-            if (this.value === 'dark') {
-                document.body.classList.add('dark-mode');
-            } else if (this.value === 'contrast') {
-                document.body.classList.add('high-contrast');
-            }
+            if (this.value === 'dark') document.body.classList.add('dark-mode');
+            else if (this.value === 'contrast') document.body.classList.add('high-contrast');
             localStorage.setItem('ec-theme', this.value);
         });
     });
 
 
-    /* ── 3. ACTIVE NAV LINK ────────────────────────────────────── */
+    /* ── 3. TEXT SIZE ──────────────────────────────────────────── */
+
+    const savedSize = localStorage.getItem('ec-textsize');
+
+    /* apply font size multiplier to root element */
+    function applyTextSize(size) {
+        const sizes = { normal: '16px', large: '18px', xlarge: '20px' };
+        document.documentElement.style.fontSize = sizes[size] || '16px';
+    }
+
+    if (savedSize) applyTextSize(savedSize);
+
+    document.querySelectorAll('input[name="textSize"]').forEach(function (radio) {
+        if (radio.value === (savedSize || 'normal')) radio.checked = true;
+
+        radio.addEventListener('change', function () {
+            applyTextSize(this.value);
+            localStorage.setItem('ec-textsize', this.value);
+        });
+    });
+
+
+    /* ── 4. ACTIVE NAV LINK ────────────────────────────────────── */
 
     const currentFile = window.location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('.site-header nav a').forEach(function (link) {
         const linkFile = link.getAttribute('href').split('/').pop();
-        if (linkFile === currentFile) {
-            link.classList.add('active');
-        } else {
-            link.classList.remove('active');
-        }
+        if (linkFile === currentFile) link.classList.add('active');
+        else link.classList.remove('active');
     });
 
 })();
