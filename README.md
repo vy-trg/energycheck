@@ -1,158 +1,79 @@
 # EnergyCheck
 
-EnergyCheck is a static front-end website built for the 2008ICT Design Thinking in IT project at Griffith University, Trimester 1, 2026.
+A responsive front-end prototype that helps Australian renters understand and manage their household electricity usage — built as part of the Design Thinking in IT unit (2008ICT) at Griffith University.
 
-The website helps Australian renters understand and compare their household electricity usage through simple colour-coded indicators, monthly comparisons, practical saving tips, and renter-appropriate advice.
-
-Built with HTML and CSS only. No JavaScript frameworks, no external APIs, no backend required.
+🔗 **[Live Site](https://vy-trg.github.io/energycheck/)**
 
 ---
 
-## Team — Group NA17
 
-| Name | Student ID | Role |
-|---|---|---|
-| Thi Tuong Vy Truong | s5434825 | Design Thinking Lead / Shared CSS & Settings |
-| Yuxin Wang | s5415967 | Requirements / Comparison & FAQ |
-| Ayat Taher Abdul Wahed | s5438900 | Storyboards / Tips & Profile |
-| Vinoothna Vaddi | s5381413 | Team Leader / Control & Alerts |
-| Rana Toor | s5371045 | Prototype & Branding / Home & About |
 
 ---
 
-## Website Pages
+## About
 
-| File | Page | Author |
-|---|---|---|
-| `index.html` | Home — energy meter and usage summary | Rana Toor (updated by Vy) |
-| `about.html` | About — project purpose, how it works, team | Rana Toor (updated by Vy) |
-| `comparison.html` | Comparison — monthly bar chart and household comparison | Yuxin Wang (updated by Vy) |
-| `tips.html` | Tips — 8 actionable energy saving tips | Ayat Taher Abdul Wahed (updated by Vy) |
-| `control.html` | Control — what renters can and cannot control | Vinoothna Vaddi (updated by Vy) |
-| `alerts.html` | Alerts — usage alerts with suggested actions | Vinoothna Vaddi (updated by Vy) |
-| `report.html` | Report — monthly usage report summary | Vy |
-| `profile.html` | Profile — household preferences and energy score | Ayat Taher Abdul Wahed (updated by Vy) |
-| `faq.html` | FAQ — plain-English answers for common questions | Yuxin Wang (updated by Vy) |
-| `settings.html` | Settings — notifications, display, and preferences | Vy |
+EnergyCheck was designed to address a real gap: most energy feedback tools assume homeowners, not renters. Our solution focuses on what renters can actually control — appliance usage, habits, and timing — without requiring landlord involvement.
+
+The project followed a full design thinking process: empathy research, problem definition, ideation, prototyping, and user testing across five sprints.
+
+**My role:** Team Leader & Design Thinking Lead — I led the team and the design process, architected the shared stylesheet, and built the Settings and Report pages. I also reviewed and updated all pages for visual and structural consistency.
 
 ---
 
-## Shared Stylesheet
+## Built With
 
-All pages link to `style.css`. This file contains:
-
-- CSS custom properties (brand colours, spacing, typography)
-- Shared layout classes (`.container`, `.page-section`, `.card`, `.card-grid`)
-- Navigation and footer styles
-- Button styles (`.btn`, `.btn-secondary`, `.btn-outline`)
-- Status badge styles (`.status-badge.low / .medium / .high`)
-- Form and toggle switch styles
-- Dark mode variable overrides
-- Page transition animation
-- Responsive breakpoints
-
-Individual page styles go in a `<style>` block in each HTML file's `<head>`.
+- HTML5
+- CSS3 (custom properties, responsive grid, dark mode)
+- No JavaScript frameworks, no external APIs, no backend
 
 ---
 
-## Key Features
+## Features
 
-- Colour-coded energy status indicator (green / amber / red) on the Home page
+- Colour-coded energy status indicator (green / amber / red)
 - Monthly bar chart comparing 6 months of usage history
 - Household comparison showing usage against similar households
-- Renter-focused tips and control advice — no landlord approval needed
-- FAQ page with plain-English explanations
-- Profile page with household preferences and energy score
-- Alerts page with suggested actions for high usage
-- Dark mode support via CSS variable overrides
-- Responsive layout — mobile hamburger menu, fluid grids
-- Page transition animation on every page load
-- Accessible navigation with `aria-label`, `aria-expanded`, and `aria-controls`
+- Renter-focused tips and control advice
+- FAQ with plain-English explanations
+- Dark mode via CSS variable overrides
+- Responsive layout with mobile hamburger menu
+- Accessible navigation with `aria-label` and `aria-expanded`
+- Page transition animation
+
+---
+
+## Pages
+
+| File | Page |
+| --- | --- |
+| `index.html` | Home — energy meter and usage summary |
+| `comparison.html` | Comparison — monthly bar chart and household data |
+| `tips.html` | Tips — 8 actionable energy saving tips |
+| `control.html` | Control — what renters can and cannot control |
+| `alerts.html` | Alerts — usage alerts with suggested actions |
+| `report.html` | Report — monthly usage report summary |
+| `profile.html` | Profile — household preferences and energy score |
+| `faq.html` | FAQ — plain-English answers for common questions |
+| `settings.html` | Settings — notifications, display, and dark mode |
+| `about.html` | About — project purpose and how it works |
 
 ---
 
 ## Known Limitations
 
-- This is a static front-end prototype — no data is saved between visits
-- All usage values (kWh, savings, comparisons) are hardcoded placeholder data
-- The Profile form does not connect to a backend
-- Dark mode must be toggled manually via the Settings page (no OS preference detection in this version)
-- No real account authentication or database
+- Static prototype — no data is saved between visits
+- All usage values are hardcoded placeholder data
+- Dark mode requires manual toggle via Settings (no OS preference detection)
+- No authentication or backend
 
 ---
 
-## Testing Checklist
+## Team — Group NA17, Trimester 1 2026
 
-Run through this before the demo or submission:
-
-- [ ] Open each HTML page directly in a browser and confirm it loads
-- [ ] Click every navigation link and confirm correct page opens
-- [ ] Confirm the current page is highlighted (`.active` class) in the nav
-- [ ] Resize browser to mobile width — confirm hamburger menu appears and opens
-- [ ] Confirm dark mode toggle on Settings page changes the page appearance
-- [ ] Confirm bar chart labels and status badges are readable at all widths
-- [ ] Confirm all `.btn` links navigate to the correct page
-- [ ] Confirm footer appears on every page
-- [ ] Confirm no assignment PDFs or private files are tracked in Git
-
----
-
-## Suggested Demo Flow
-
-1. **index.html** — introduce EnergyCheck and the colour-coded status indicator
-2. **comparison.html** — show the monthly bar chart and household comparison table
-3. **tips.html** — walk through the 8 tips and quick wins section
-4. **control.html** — explain what renters can and cannot control
-5. **alerts.html** — show the alert cards with suggested actions
-6. **profile.html** — show household preferences and energy score
-7. **settings.html** — demonstrate dark mode and notification toggles
-8. **faq.html** — show the sidebar FAQ layout and plain-English explanations
-9. **about.html** — connect the website back to the project problem and solution
-
----
-
-## Security Notes
-
-This is a static prototype with no backend. No user data is collected or stored.
-
-If EnergyCheck were developed into a real product, it would require:
-
-- HTTPS hosting
-- Server-side validation for all form inputs
-- Secure authentication for real user accounts
-- Careful handling of household energy data under Australian privacy law
-- Protection against injection attacks if a backend or database is added
-
----
-
-## Git Workflow — Team Reminders
-
-### Before coding
-
-```bash
-git checkout main
-git pull origin main
-```
-
-### Saving work before pulling
-
-```bash
-git add .
-git commit -m "Describe your changes"
-git pull origin main
-```
-
-### Pushing your work
-
-```bash
-git add .
-git commit -m "Describe your changes"
-git push origin your-branch-name
-```
-
-### Rules
-
-- Always pull before coding and before pushing
-- Never use `git push --force`
-- Never delete a teammate's file
-- Commit frequently — uncommitted code is not safe
+| Name | Role |
+| --- | --- |
+| Thi Tuong Vy Truong | Team Leader / Design Thinking Lead |
+| Yuxin Wang | Requirements |
+| Ayat Taher Abdul Wahed | Storyboards |
+| Vinoothna Vaddi | Control & Alerts |
+| Rana Toor | Prototype & Branding |
