@@ -492,3 +492,44 @@ body.dark-mode .card {
 }
 
 /* splash animation lives in index.html only — see the <style> block there */
+
+
+/* high contrast mode — activated by nav.js when user selects it in Settings */
+body.high-contrast {
+    --color-bg: #000000;
+    --color-text: #ffffff;
+    --color-text-light: #dddddd;
+    --color-border: #ffffff;
+    --color-white: #000000;
+    --color-primary: #00ff00;
+    --color-secondary: #ffff00;
+}
+
+body.high-contrast .site-header,
+body.high-contrast .site-footer {
+    background-color: #000000;
+    border-bottom: 2px solid #ffffff;
+}
+
+
+/* OS-level dark mode preference — applies automatically if no manual override.
+   nav.js overrides this when the user makes an explicit choice in Settings. */
+@media (prefers-color-scheme: dark) {
+    body:not(.high-contrast) {
+        --color-bg: #1A1A1A;
+        --color-text: #F0F0F0;
+        --color-text-light: #AAAAAA;
+        --color-border: #444444;
+        --color-white: #2A2A2A;
+    }
+
+    body:not(.high-contrast) .site-header,
+    body:not(.high-contrast) .site-footer {
+        background-color: #1B4D1E;
+    }
+
+    body:not(.high-contrast) .card {
+        background-color: #2A2A2A;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+}
