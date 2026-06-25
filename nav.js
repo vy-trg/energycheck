@@ -69,10 +69,27 @@
 
     const savedSize = localStorage.getItem('ec-textsize');
 
-    /* apply font size multiplier to root element */
+    /* apply text size by updating the CSS variable on :root —
+       all font-size values in style.css use var(--font-size-body)
+       so changing the variable cascades everywhere */
     function applyTextSize(size) {
-        const sizes = { normal: '16px', large: '18px', xlarge: '20px' };
-        document.documentElement.style.fontSize = sizes[size] || '16px';
+        const root = document.documentElement;
+        if (size === 'large') {
+            root.style.setProperty('--font-size-body', '18px');
+            root.style.setProperty('--font-size-small', '16px');
+            root.style.setProperty('--font-size-h1', '36px');
+            root.style.setProperty('--font-size-h2', '28px');
+        } else if (size === 'xlarge') {
+            root.style.setProperty('--font-size-body', '20px');
+            root.style.setProperty('--font-size-small', '18px');
+            root.style.setProperty('--font-size-h1', '40px');
+            root.style.setProperty('--font-size-h2', '32px');
+        } else {
+            root.style.removeProperty('--font-size-body');
+            root.style.removeProperty('--font-size-small');
+            root.style.removeProperty('--font-size-h1');
+            root.style.removeProperty('--font-size-h2');
+        }
     }
 
     if (savedSize) applyTextSize(savedSize);
