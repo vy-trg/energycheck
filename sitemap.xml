@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <!-- EnergyCheck sitemap
+         Author: Thi Tuong Vy Truong
+         Update lastmod dates when pages change. -->
+
+    <url>
+        <loc>https://vy-trg.github.io/energycheck/</loc>
+        <lastmod>2026-06-25</lastmod>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://vy-trg.github.io/energycheck/about.html</loc>
+        <lastmod>2026-06-25</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://vy-trg.github.io/energycheck/comparison.html</loc>
+        <lastmod>2026-06-25</lastmod>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://vy-trg.github.io/energycheck/tips.html</loc>
+        <lastmod>2026-06-25</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://vy-trg.github.io/energycheck/control.html</loc>
+        <lastmod>2026-06-25</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://vy-trg.github.io/energycheck/alerts.html</loc>
+        <lastmod>2026-06-25</lastmod>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://vy-trg.github.io/energycheck/report.html</loc>
+        <lastmod>2026-06-25</lastmod>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://vy-trg.github.io/energycheck/profile.html</loc>
+        <lastmod>2026-06-25</lastmod>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://vy-trg.github.io/energycheck/faq.html</loc>
+        <lastmod>2026-06-25</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://vy-trg.github.io/energycheck/settings.html</loc>
+        <lastmod>2026-06-25</lastmod>
+        <priority>0.6</priority>
+    </url>
+
+</urlset>

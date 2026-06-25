@@ -1,0 +1,84 @@
+/*
+    EnergyCheck — print.css
+    Author: Thi Tuong Vy Truong
+
+    Applied only when printing or saving as PDF (media="print").
+    Linked from report.html only.
+
+    Goal: clean, readable output — removes navigation, shadows,
+    animations, and dark backgrounds so the printed page looks
+    like a simple energy report.
+*/
+
+/* hide everything that's not content */
+.site-header,
+.site-footer,
+.nav-toggle,
+#navToggle,
+.btn,
+.action-row {
+    display: none !important;
+}
+
+/* reset colours to black on white for print */
+body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 12pt;
+    line-height: 1.5;
+}
+
+/* remove shadows and coloured backgrounds from cards */
+.card,
+.stat-card,
+.context-box {
+    box-shadow: none !important;
+    border: 1px solid #cccccc !important;
+    background: #ffffff !important;
+    break-inside: avoid;
+}
+
+/* keep bar chart readable in greyscale */
+.bar.low { background-color: #555555 !important; }
+.bar.medium { background-color: #888888 !important; }
+.bar.high { background-color: #222222 !important; }
+
+/* status badges — invert to black text on light background for print */
+.status-badge {
+    background-color: #eeeeee !important;
+    color: #000000 !important;
+    border: 1px solid #999999;
+}
+
+/* section titles */
+.section-title {
+    border-bottom-color: #000000 !important;
+    color: #000000 !important;
+}
+
+h1, h2, h3 {
+    color: #000000 !important;
+}
+
+/* avoid page breaks inside key sections */
+section {
+    break-inside: avoid;
+}
+
+/* make sure links show their href when printed */
+a[href]::after {
+    content: ' (' attr(href) ')';
+    font-size: 10pt;
+    color: #555555;
+}
+
+/* except nav links and buttons — already hidden */
+.site-header a::after,
+.btn::after {
+    content: none;
+}
+
+/* print header — show site name and date at top */
+@page {
+    margin: 2cm;
+}

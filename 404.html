@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--
+        EnergyCheck — 404 Not Found page
+        Author: Thi Tuong Vy Truong
+    -->
+    <meta charset="UTF-8">
+    <meta name="description" content="Page not found — return to EnergyCheck.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found — EnergyCheck</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .error-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: var(--space-xl) var(--space-md);
+            min-height: 60vh;
+        }
+
+        .error-code {
+            font-size: 96px;
+            font-weight: 700;
+            color: var(--color-primary);
+            line-height: 1;
+            margin-bottom: var(--space-sm);
+            opacity: 0.15;
+        }
+
+        .error-icon {
+            font-size: 48px;
+            margin-bottom: var(--space-md);
+        }
+
+        .error-section h1 {
+            margin-bottom: var(--space-sm);
+        }
+
+        .error-section p {
+            max-width: 400px;
+            color: var(--color-text-light);
+            margin-bottom: var(--space-lg);
+        }
+
+        .error-links {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="site-header">
+        <span class="brand">⚡ EnergyCheck</span>
+        <button id="navToggle" class="nav-toggle" aria-label="Open navigation menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        <nav id="mainNav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="comparison.html">Comparison</a>
+            <a href="tips.html">Tips</a>
+            <a href="control.html">Control</a>
+            <a href="alerts.html">Alerts</a>
+            <a href="report.html">Report</a>
+            <a href="profile.html">Profile</a>
+            <a href="faq.html">FAQ</a>
+            <a href="settings.html">Settings</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="error-section">
+            <div class="error-code">404</div>
+            <div class="error-icon">⚡</div>
+            <h1>Page not found</h1>
+            <p>The page you're looking for doesn't exist or may have moved.</p>
+            <div class="error-links">
+                <a href="index.html" class="btn">Go to Home</a>
+                <a href="faq.html" class="btn btn-outline">Visit FAQ</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2026 EnergyCheck — Thi Tuong Vy Truong</p>
+    </footer>
+
+    <script src="nav.js"></script>
+
+</body>
+
+</html>
