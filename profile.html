@@ -19,6 +19,7 @@
     -->
 
     <meta charset="UTF-8">
+    <meta name="description" content="Set your household preferences to get personalised energy-saving recommendations from EnergyCheck.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EnergyCheck — Profile</title>
 
@@ -131,6 +132,10 @@
     <header class="site-header">
 
         <span class="brand">⚡ EnergyCheck</span>
+
+        <button id="navToggle" class="nav-toggle" aria-label="Open navigation menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
 
         <nav id="mainNav">
             <a href="index.html">Home</a>
@@ -305,7 +310,7 @@
                              which appeared before the user clicked anything (looked like a bug).
                              Replaced with a prototype note explaining this is a front-end prototype. -->
                         <div style="margin-top: var(--space-lg);">
-                            <button class="btn">Save Preferences</button>
+                            <button class="btn" aria-label="Save profile preferences">Save Preferences</button>
                             <p class="text-muted" style="margin-top: var(--space-sm);">
                                 This is a front-end prototype — preferences are not saved between visits.
                                 In a live version, your settings would be stored locally on your device.
@@ -413,6 +418,7 @@
 
     <!-- MOBILE NAVIGATION -->
 
+    <script src="nav.js"></script>
 </body>
 
 </html>
