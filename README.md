@@ -6,7 +6,10 @@ A responsive front-end prototype that helps Australian renters understand and ma
 
 ---
 
+| ![Home](assets/screenshot-home.png) | ![Comparison](assets/screenshot-comparison.png) |
+| --- | --- |
 
+![Report](assets/screenshot-report.png)
 
 ---
 
