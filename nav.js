@@ -18,11 +18,9 @@
     if (toggle && nav) {
         toggle.addEventListener('click', function () {
             const isOpen = nav.classList.toggle('open');
-            /* aria-expanded lets screen readers know menu state */
             toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         });
 
-        /* close menu when a link is tapped on mobile */
         nav.querySelectorAll('a').forEach(function (link) {
             link.addEventListener('click', function () {
                 nav.classList.remove('open');
@@ -30,7 +28,6 @@
             });
         });
 
-        /* close menu on outside click */
         document.addEventListener('click', function (e) {
             if (!toggle.contains(e.target) && !nav.contains(e.target)) {
                 nav.classList.remove('open');
@@ -42,8 +39,9 @@
 
     /* ── 2. DARK MODE ──────────────────────────────────────────── */
 
-    /* apply saved preference on every page load */
     const saved = localStorage.getItem('ec-theme');
+
+    /* apply saved preference on every page load */
     if (saved === 'dark') {
         document.body.classList.add('dark-mode');
     } else if (saved === 'contrast') {
@@ -53,8 +51,18 @@
     /* listen for the colour theme radio buttons on settings.html */
     document.querySelectorAll('input[name="colourTheme"]').forEach(function (radio) {
 
-        /* pre-select the saved value */
-        if (radio.value === (saved || 'default')) {
+        /* pre-select based on actual body state, not just saved value.
+           if OS dark mode is active with no saved preference, show
+           "Dark mode" selected rather than "Default (light)" */
+        const isDark = document.body.classList.contains('dark-mode');
+        const isContrast = document.body.classList.contains('high-contrast');
+        const osPrefersDark = !saved && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        const actualTheme = isContrast ? 'contrast'
+            : (isDark || osPrefersDark) ? 'dark'
+            : 'default';
+
+        if (radio.value === actualTheme) {
             radio.checked = true;
         }
 
@@ -72,8 +80,6 @@
 
     /* ── 3. ACTIVE NAV LINK ────────────────────────────────────── */
 
-    /* mark the nav link that matches the current page automatically,
-       so we don't need to hardcode class="active" on every page */
     const currentFile = window.location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('.site-header nav a').forEach(function (link) {
         const linkFile = link.getAttribute('href').split('/').pop();
