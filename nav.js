@@ -52,7 +52,7 @@
     document.querySelectorAll('input[name="colourTheme"]').forEach(function (radio) {
         const activeTheme = savedTheme === 'contrast' ? 'contrast'
             : (savedTheme === 'dark' || (!savedTheme && osPrefersDark)) ? 'dark'
-            : 'default';
+                : 'default';
 
         if (radio.value === activeTheme) radio.checked = true;
 
