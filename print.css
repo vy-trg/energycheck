@@ -39,9 +39,17 @@ body {
 }
 
 /* keep bar chart readable in greyscale */
-.bar.low { background-color: #555555 !important; }
-.bar.medium { background-color: #888888 !important; }
-.bar.high { background-color: #222222 !important; }
+.bar.low {
+    background-color: #555555 !important;
+}
+
+.bar.medium {
+    background-color: #888888 !important;
+}
+
+.bar.high {
+    background-color: #222222 !important;
+}
 
 /* status badges — invert to black text on light background for print */
 .status-badge {
@@ -56,7 +64,9 @@ body {
     color: #000000 !important;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     color: #000000 !important;
 }
 
