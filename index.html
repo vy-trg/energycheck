@@ -13,10 +13,62 @@
     -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
     <title>Home — EnergyCheck</title>
 
     <style>
+        /* splash animation — homepage only.
+           Runs once on load: a brief overlay + logo fades in then out.
+           Moved here from style.css so it doesn't fire on every page navigation.
+           prefers-reduced-motion cuts it to near-zero for users with motion sensitivity. */
+
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        body::before {
+            inset: 0;
+            background: radial-gradient(circle at center,
+                    rgba(46, 125, 50, 0.10),
+                    transparent 40%),
+                var(--color-bg);
+            animation: energycheck-overlay 0.9s ease forwards;
+        }
+
+        body::after {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.88);
+            font-family: var(--font-main);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            content: '⚡ EnergyCheck';
+            white-space: nowrap;
+            animation: energycheck-logo 0.9s ease forwards;
+        }
+
+        @keyframes energycheck-overlay {
+            0%, 55% { opacity: 1; visibility: visible; }
+            100% { opacity: 0; visibility: hidden; }
+        }
+
+        @keyframes energycheck-logo {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.80); }
+            35% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            65% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.06); visibility: hidden; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            body::before, body::after { animation-duration: 0.01ms; }
+        }
+
         /* hero section — centre the meter card on the page */
         .hero {
             padding-top: var(--space-xl);
@@ -228,7 +280,7 @@
     </main>
 
     <footer class="site-footer">
-        <p>© 2026 EnergyCheck — NA17 | 2008ICT Design Thinking in IT, Griffith University</p>
+        <p>© 2026 EnergyCheck — Thi Tuong Vy Truong</p>
     </footer>
 
 </body>
