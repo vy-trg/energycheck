@@ -2,7 +2,7 @@
 
 A responsive front-end web app that helps Australian renters understand and manage their household electricity usage — built using HTML, CSS, and vanilla JavaScript.
 
-🔗 **[Live Site](https://vy-trg.github.io/energycheck/)**
+🔗 **[Live Site](https://vy-trg.github.io/energycheck/)** &nbsp;·&nbsp; 📁 **[GitHub Repo](https://github.com/vy-trg/energycheck)**
 
 ---
 
