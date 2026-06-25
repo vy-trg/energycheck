@@ -511,25 +511,6 @@ body.high-contrast .site-footer {
     border-bottom: 2px solid #ffffff;
 }
 
-
-/* OS-level dark mode preference — applies automatically if no manual override.
-   nav.js overrides this when the user makes an explicit choice in Settings. */
-@media (prefers-color-scheme: dark) {
-    body:not(.high-contrast) {
-        --color-bg: #1A1A1A;
-        --color-text: #F0F0F0;
-        --color-text-light: #AAAAAA;
-        --color-border: #444444;
-        --color-white: #2A2A2A;
-    }
-
-    body:not(.high-contrast) .site-header,
-    body:not(.high-contrast) .site-footer {
-        background-color: #1B4D1E;
-    }
-
-    body:not(.high-contrast) .card {
-        background-color: #2A2A2A;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-}
+/* dark mode is controlled entirely by nav.js — no CSS media query.
+   JS reads OS preference on load, persists choice via localStorage,
+   and adds .dark-mode or .high-contrast class to <body>. */
