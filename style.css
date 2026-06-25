@@ -1,7 +1,7 @@
 /*
     EnergyCheck — shared stylesheet
-    Author: Vy (Thi Tuong Vy Truong) s5434825, NA17
-    All team members link to this file. Individual page styles
+    Author: Thi Tuong Vy Truong
+    All pages link to this file. Individual page styles
     go in each page's own <style> block.
 */
 
@@ -491,94 +491,4 @@ body.dark-mode .card {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* ============================================================
-   PAGE TRANSITION — add this block to the bottom of style.css
-   Author: Vy (Thi Tuong Vy Truong) s5434825, NA17
-
-   How it works:
-   - body::before  = a full-screen cream overlay that fades out
-   - body::after   = the ⚡ EnergyCheck text that appears briefly
-     in the centre of the screen, then fades out
-   - Both animations run once on every page load automatically —
-     no changes needed to any HTML file.
-   - prefers-reduced-motion: cuts animation to near-zero for
-     users who have motion sensitivity enabled in their OS.
-   ============================================================ */
-
-body::before,
-body::after {
-    content: '';
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-}
-
-/* full-screen overlay — fades from opaque to transparent */
-body::before {
-    inset: 0;
-    background: radial-gradient(circle at center,
-            rgba(46, 125, 50, 0.10),
-            transparent 40%),
-        var(--color-bg);
-    animation: energycheck-overlay 0.9s ease forwards;
-}
-
-/* centred logo text — scales up and fades out */
-body::after {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.88);
-    font-family: var(--font-main);
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--color-primary);
-    content: '⚡ EnergyCheck';
-    white-space: nowrap;
-    animation: energycheck-logo 0.9s ease forwards;
-}
-
-@keyframes energycheck-overlay {
-
-    0%,
-    55% {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    100% {
-        opacity: 0;
-        visibility: hidden;
-    }
-}
-
-@keyframes energycheck-logo {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.80);
-    }
-
-    35% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-    }
-
-    65% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-    }
-
-    100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(1.06);
-        visibility: hidden;
-    }
-}
-
-/* accessibility — respect reduced-motion OS preference */
-@media (prefers-reduced-motion: reduce) {
-
-    body::before,
-    body::after {
-        animation-duration: 0.01ms;
-    }
-}
+/* splash animation lives in index.html only — see the <style> block there */
