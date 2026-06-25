@@ -12,7 +12,8 @@
         Assignment 1 prototype (Section 6, Figure 5).
     -->
     <meta charset="UTF-8">
-    <meta name="description" content="EnergyCheck — see your household electricity usage at a glance. Colour-coded status, monthly comparison, and renter-friendly tips.">
+    <meta name="description"
+        content="EnergyCheck — see your household electricity usage at a glance. Colour-coded status, monthly comparison, and renter-friendly tips.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
@@ -55,19 +56,48 @@
         }
 
         @keyframes energycheck-overlay {
-            0%, 55% { opacity: 1; visibility: visible; }
-            100% { opacity: 0; visibility: hidden; }
+
+            0%,
+            55% {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            100% {
+                opacity: 0;
+                visibility: hidden;
+            }
         }
 
         @keyframes energycheck-logo {
-            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.80); }
-            35% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-            65% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.06); visibility: hidden; }
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.80);
+            }
+
+            35% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            65% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1.06);
+                visibility: hidden;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            body::before, body::after { animation-duration: 0.01ms; }
+
+            body::before,
+            body::after {
+                animation-duration: 0.01ms;
+            }
         }
 
         /* hero section — centre the meter card on the page */
