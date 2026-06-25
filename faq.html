@@ -1,115 +1,73 @@
 <!DOCTYPE html>
+<!-- EnergyCheck — Control page
+     Original author: Vinoothna Vaddi
+     Updated by: Vy (Thi Tuong Vy Truong)
+     Changes: fixed brand tag, added nav IDs for mobile toggle,
+     added mobile nav JS, fixed section-title usage in cards,
+     cleaned up Quick Actions list markup,
+     added FR5 section explaining common reasons for higher bills. -->
 <html lang="en">
 
 <head>
-    <!--
-        EnergyCheck — FAQ / Help page
-        Original author: Yuxin Wang, s5415967, NA17
-        Updated by: Vy (Thi Tuong Vy Truong) s5434825, NA17
-        Changes: added class="section-title" to h1,
-        replaced "What can I control?" bullet list with a
-        link to control.html to avoid content duplication.
-        Provides simple explanations for new users.
-        Directly responds to evaluator feedback about lack of guidance.
-        Based on requirements: plain English, renter-friendly advice,
-        high bill explanation, and controllable / uncontrollable factors.
-    -->
     <meta charset="UTF-8">
-    <meta name="description" content="Frequently asked questions about EnergyCheck — simple answers for understanding your electricity usage.">
+    <meta name="description" content="Learn what affects your electricity bill and what actions renters can take to reduce energy usage.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ — EnergyCheck</title>
+    <title>Control — EnergyCheck</title>
+    <!-- Shared Team CSS -->
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
 
     <style>
-        .faq-layout {
+        /* control/cannot control two-column grid */
+        .control-grid {
             display: grid;
-            grid-template-columns: 240px 1fr;
+            grid-template-columns: 1fr 1fr;
             gap: var(--space-md);
-            align-items: start;
+            margin-bottom: var(--space-lg);
         }
 
-        .faq-nav {
-            background-color: var(--color-white);
-            border-radius: var(--radius-md);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
-        }
-
-        .faq-nav a {
-            display: block;
-            padding: 12px var(--space-md);
-            border-left: 3px solid transparent;
-            color: var(--color-text);
-            font-size: var(--font-size-small);
-        }
-
-        .faq-nav a:hover {
-            background-color: var(--color-bg);
-            text-decoration: none;
-        }
-
-        .faq-nav a.active {
-            border-left-color: var(--color-primary);
-            color: var(--color-primary);
-            font-weight: 600;
-            background-color: rgba(46, 125, 50, 0.06);
-        }
-
-        .faq-panel {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-md);
-        }
-
-        .faq-question {
-            color: var(--color-primary);
-            margin-bottom: var(--space-xs);
-        }
-
-        .tip-box {
-            background-color: rgba(255, 191, 0, 0.15);
-            border-left: 4px solid var(--color-secondary);
-            border-radius: 0 var(--radius-md) var(--radius-md) 0;
-            padding: var(--space-md);
+        /* bullet list inside control cards — overrides shared ul { list-style: none } */
+        .control-list {
             margin-top: var(--space-sm);
+            padding-left: var(--space-md);
         }
 
-        .tip-box p {
-            margin: 0;
-            font-size: var(--font-size-small);
+        .control-list li {
+            list-style: disc !important;
+            margin-bottom: 8px;
+            font-size: var(--font-size-body);
         }
 
+        /* quick actions list */
         .quick-list {
             margin-top: var(--space-sm);
             padding-left: var(--space-md);
         }
 
         .quick-list li {
-            list-style: disc;
-            margin-bottom: 6px;
+            list-style: disc !important;
+            margin-bottom: 8px;
+            font-size: var(--font-size-body);
+        }
+
+        /* motivational callout box */
+        .message-box {
+            background-color: rgba(46, 125, 50, 0.08);
+            border-left: 4px solid var(--color-primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+
+        .message-box p {
+            margin: 0;
+            color: var(--color-primary);
+            font-weight: 600;
         }
 
         @media (max-width: 700px) {
-            .faq-layout {
+            .control-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .faq-nav {
-                display: flex;
-                flex-wrap: wrap;
-            }
-
-            .faq-nav a {
-                flex: 1;
-                text-align: center;
-                border-left: none;
-                border-bottom: 3px solid transparent;
-            }
-
-            .faq-nav a.active {
-                border-left-color: transparent;
-                border-bottom-color: var(--color-primary);
             }
         }
     </style>
@@ -117,154 +75,101 @@
 
 <body>
 
+    <!-- HEADER — updated by Vy: changed <div class="brand"> to <span class="brand">,
+         added id="navToggle" and id="mainNav" for mobile nav JS -->
     <header class="site-header">
         <span class="brand">⚡ EnergyCheck</span>
-
-        <button id="navToggle" class="nav-toggle" aria-label="Open navigation menu" aria-expanded="false">
-            <span></span><span></span><span></span>
-        </button>
 
         <nav id="mainNav">
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
             <a href="comparison.html">Comparison</a>
             <a href="tips.html">Tips</a>
-            <a href="control.html">Control</a>
+            <a href="control.html" class="active">Control</a>
             <a href="alerts.html">Alerts</a>
             <a href="report.html">Report</a>
-            <a href="profile.html">Profile</a>
-            <a href="faq.html" class="active">FAQ</a>
+            <a href="faq.html">FAQ</a>
             <a href="settings.html">Settings</a>
+            <a href="profile.html">Profile</a>
         </nav>
     </header>
 
     <main>
+
         <div class="container page-section">
 
-            <!-- h1 class added by Vy to match shared section-title style -->
-            <h1 class="section-title">FAQ / Help</h1>
-            <p class="text-muted" style="margin-top: 8px; margin-bottom: var(--space-lg);">
-                Simple answers for busy households who want to understand their electricity use quickly.
+            <h1 class="section-title">Control</h1>
+            <p class="text-muted" style="margin-bottom: var(--space-lg);">
+                Learn what affects your electricity bills and what actions you can take to reduce energy usage.
             </p>
 
-            <div class="faq-layout">
+            <!-- CAN / CANNOT CONTROL — original content by Vinoothna
+                 Vy updated markup: replaced <p>• text</p> with proper <ul> lists -->
+            <h2 class="section-title">What You Can Control vs What You Can't Control</h2>
+            <div class="control-grid">
 
-                <nav class="faq-nav" aria-label="FAQ sections">
-                    <a href="#status" class="active">Usage status</a>
-                    <a href="#bill">High bills</a>
-                    <a href="#comparison">Similar households</a>
-                    <a href="#control">What I can control →</a>
-                    <a href="#renters">Renters</a>
-                    <a href="#login">Login</a>
-                    <a href="#quicktips">Quick tips</a>
-                </nav>
-
-                <div class="faq-panel">
-
-                    <section class="card" id="status">
-                        <h2 class="faq-question">How do I know if my usage is normal, high, or low?</h2>
-                        <p>
-                            EnergyCheck uses simple colours to show your electricity usage status.
-                            Green means your usage is normal, amber means it is higher than usual,
-                            and red means it is very high.
-                        </p>
-
-                        <div class="tip-box">
-                            <p>
-                                Tip: Look at the colour first, then read the short explanation under the chart.
-                                This helps you understand the main message quickly.
-                            </p>
-                        </div>
-                    </section>
-
-                    <section class="card" id="bill">
-                        <h2 class="faq-question">Why is my electricity bill higher than usual?</h2>
-                        <p>
-                            A higher bill can happen for many reasons. Common causes include air conditioning,
-                            heating, dryers, cooking appliances, older appliances, or more people staying at home.
-                        </p>
-
-                        <div class="tip-box">
-                            <p>
-                                A high bill does not always mean you did something wrong. Energy use can change
-                                because of weather, household size, appliance age, or daily routines.
-                            </p>
-                        </div>
-                    </section>
-
-                    <section class="card" id="comparison">
-                        <h2 class="faq-question">Why compare my usage with similar households?</h2>
-                        <p>
-                            Different households use electricity in different ways. A small apartment and a large
-                            family home should not be compared in the same way.
-                        </p>
-                        <p>
-                            EnergyCheck compares your usage with similar households so the result is fairer and
-                            easier to understand.
-                        </p>
-                    </section>
-
-                    <!-- "What can I control?" section — updated by Vy.
-                         Original version by Yuxin repeated the bullet list from control.html.
-                         Replaced with a short description and link to avoid content duplication. -->
-                    <section class="card" id="control">
-                        <h2 class="faq-question">What can I control?</h2>
-                        <p>
-                            There are many daily habits you can change as a renter — even without
-                            landlord approval. EnergyCheck has a dedicated page that breaks down
-                            what you can and cannot control, with practical advice for each.
-                        </p>
-                        <a class="btn" href="control.html">Go to Control page →</a>
-                    </section>
-
-                    <section class="card" id="renters">
-                        <h2 class="faq-question">What can’t I control as a renter?</h2>
-                        <p>
-                            Renters may have limited control over some energy-related problems. For example,
-                            you may not be able to change insulation, fixed appliances, solar panels, windows,
-                            or building design.
-                        </p>
-
-                        <div class="tip-box">
-                            <p>
-                                EnergyCheck focuses on realistic and affordable actions, so renters can still
-                                make small changes without needing landlord approval.
-                            </p>
-                        </div>
-                    </section>
-
-                    <section class="card" id="login">
-                        <h2 class="faq-question">Do I need to log in to use EnergyCheck?</h2>
-                        <p>
-                            No. You can access the basic information, comparison, and energy-saving advice
-                            without creating an account or logging in.
-                        </p>
-                        <p>
-                            This makes the website quicker and easier to use for people with limited time.
-                        </p>
-                    </section>
-
-                    <section class="card" id="quicktips">
-                        <h2 class="faq-question">How can I quickly reduce my electricity use?</h2>
-                        <p>
-                            Start with simple actions that do not cost money. Small habits can still make a
-                            difference over time.
-                        </p>
-
-                        <ul class="quick-list">
-                            <li>Set air conditioning to a moderate temperature.</li>
-                            <li>Switch off standby power at the wall.</li>
-                            <li>Use cold water for washing when possible.</li>
-                            <li>Dry clothes naturally instead of using a dryer.</li>
-                            <li>Check the Comparison page once a month.</li>
-                        </ul>
-
-                        <a class="btn" href="comparison.html" style="margin-top: var(--space-sm);">
-                            Back to Comparison
-                        </a>
-                    </section>
-
+                <div class="card">
+                    <h3 style="color: var(--color-primary); margin-bottom: var(--space-sm);">✅ Things You Can Control
+                    </h3>
+                    <ul class="control-list">
+                        <li>Turning lights off when not in use</li>
+                        <li>Using fans before air conditioning</li>
+                        <li>Turning appliances off at the wall</li>
+                        <li>Washing clothes during off-peak hours</li>
+                        <li>Closing blinds during hot afternoons</li>
+                    </ul>
                 </div>
+
+                <div class="card">
+                    <h3 style="color: var(--color-alert); margin-bottom: var(--space-sm);">⛔ Things You Cannot Control
+                    </h3>
+                    <ul class="control-list">
+                        <li>Weather and outdoor temperatures</li>
+                        <li>Old appliances provided by landlords</li>
+                        <li>Poor insulation in apartments</li>
+                        <li>Shared electricity systems</li>
+                        <li>Building design and sun exposure</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- QUICK ACTIONS — original content by Vinoothna
+                 Vy updated markup: replaced <ul><li><p>• text</p></li></ul> with clean <ul> list -->
+            <div class="card" style="margin-bottom: var(--space-lg);">
+                <h2 class="section-title">Quick Actions</h2>
+                <p class="text-muted" style="margin-bottom: var(--space-sm);">
+                    Small changes every day can help lower electricity costs.
+                </p>
+                <ul class="quick-list">
+                    <li>Set air conditioning to 24°C</li>
+                    <li>Unplug chargers when not needed</li>
+                    <li>Use natural sunlight during the day</li>
+                    <li>Switch devices off before sleeping</li>
+                    <li>Avoid leaving appliances on standby</li>
+                </ul>
+            </div>
+
+            <!-- FR5 — explanation of common reasons for higher bills, added by Vy -->
+            <div class="card" style="margin-bottom: var(--space-lg);">
+                <h2 class="section-title">Why Is My Bill Higher Than Usual?</h2>
+                <p class="text-muted" style="margin-bottom: var(--space-sm);">
+                    A higher bill does not always mean you did something wrong.
+                    Common reasons include:
+                </p>
+                <ul class="quick-list">
+                    <li>More heating or cooling due to seasonal temperature changes</li>
+                    <li>More people staying at home than usual</li>
+                    <li>Older appliances provided by your landlord using more energy</li>
+                    <li>Leaving devices on standby for longer periods</li>
+                    <li>Running appliances during peak electricity hours</li>
+                </ul>
+            </div>
+
+            <!-- MOTIVATIONAL MESSAGE -->
+            <div class="message-box">
+                <p>Focus on the things you can control. Small changes can still reduce your electricity bills and energy
+                    usage.</p>
             </div>
 
         </div>
@@ -273,6 +178,8 @@
     <footer class="site-footer">
         <p>© 2026 EnergyCheck — Thi Tuong Vy Truong</p>
     </footer>
+
+    <!-- mobile nav toggle (see note in style.css) — added by Vy -->
 
     <script src="nav.js"></script>
 </body>
