@@ -40,9 +40,11 @@
     /* ── 2. DARK MODE ──────────────────────────────────────────── */
 
     const saved = localStorage.getItem('ec-theme');
+    const osPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    /* apply saved preference on every page load */
-    if (saved === 'dark') {
+    /* apply theme on every page load:
+       saved preference wins; OS preference is the fallback */
+    if (saved === 'dark' || (!saved && osPrefersDark)) {
         document.body.classList.add('dark-mode');
     } else if (saved === 'contrast') {
         document.body.classList.add('high-contrast');
@@ -51,18 +53,15 @@
     /* listen for the colour theme radio buttons on settings.html */
     document.querySelectorAll('input[name="colourTheme"]').forEach(function (radio) {
 
-        /* pre-select based on actual body state, not just saved value.
-           if OS dark mode is active with no saved preference, show
-           "Dark mode" selected rather than "Default (light)" */
-        const isDark = document.body.classList.contains('dark-mode');
-        const isContrast = document.body.classList.contains('high-contrast');
-        const osPrefersDark = !saved && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        const actualTheme = isContrast ? 'contrast'
-            : (isDark || osPrefersDark) ? 'dark'
+        /* derive the active theme from saved value or OS preference —
+           check matchMedia directly, not body class, since this runs
+           before the class is applied above in some browsers */
+        const activeTheme = saved === 'contrast' ? 'contrast'
+            : (saved === 'dark' || (!saved && osPrefersDark)) ? 'dark'
+            : saved === 'default' ? 'default'
             : 'default';
 
-        if (radio.value === actualTheme) {
+        if (radio.value === activeTheme) {
             radio.checked = true;
         }
 
