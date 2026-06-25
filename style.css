@@ -199,7 +199,8 @@ p {
     display: block;
     width: 22px;
     height: 2px;
-    background-color: var(--color-white);
+    /* always white regardless of dark mode — nav bg is always green */
+    background-color: #ffffff;
     margin-top: 4px;
     margin-bottom: 4px;
     border-radius: 2px;
