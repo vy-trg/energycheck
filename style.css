@@ -389,8 +389,16 @@ p {
 
 .form-group input:focus,
 .form-group select:focus {
-    outline: none;
+    /* outline replaced with a visible focus ring for keyboard accessibility */
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
     border-color: var(--color-primary);
+}
+
+/* focus-visible covers all interactive elements — buttons, links, radio buttons */
+:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
 }
 
 
